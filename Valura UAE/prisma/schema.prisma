@@ -1,0 +1,500 @@
+// Valura UAE — Prisma Schema
+// Production: AWS me-central-1 (Abu Dhabi) | PDPL compliant
+// In Prisma v7, datasource url lives in prisma.config.ts
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// Enums
+// ═══════════════════════════════════════════════════════════════════════════
+
+enum AvatarType {
+  FIGURE
+  HOME
+  GARDEN
+}
+
+enum ContentTrack {
+  CONVENTIONAL
+  ISLAMIC
+  NEUTRAL
+}
+
+enum UserContentTrack {
+  CONVENTIONAL
+  ISLAMIC
+  BOTH
+}
+
+enum TonePref {
+  STANDARD
+  DIRECT
+  ENCOURAGING
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum NodeKind {
+  QUIZ
+  MINIGAME
+  STORY
+  BOSS
+}
+
+enum QuestionKind {
+  SINGLE
+  MULTI
+  TRUE_FALSE
+}
+
+enum FriendshipStatus {
+  PENDING
+  ACCEPTED
+  BLOCKED
+}
+
+enum PledgeStatus {
+  ACTIVE
+  WON
+  LOST
+  CANCELLED
+}
+
+enum CosmeticKind {
+  AVATAR_THEME
+  ROAD_SKIN
+  STICKER_PACK
+}
+
+enum BadgeKind {
+  MASTERY
+  STREAK
+  MILESTONE
+  GENERAL
+}
+
+enum BadgeTier {
+  BRONZE
+  SILVER
+  GOLD
+  PLATINUM
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// Auth.js v5 required models
+// ═══════════════════════════════════════════════════════════════════════════
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@index([userId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// User
+// ═══════════════════════════════════════════════════════════════════════════
+
+model User {
+  id                String           @id @default(cuid())
+  email             String?          @unique
+  emailVerified     DateTime?
+  displayName       String?
+  image             String?
+  avatarType        AvatarType       @default(FIGURE)
+  locale            String           @default("en")  // "en" | "ar"
+  contentTrack      UserContentTrack @default(CONVENTIONAL)
+  tonePref          TonePref         @default(STANDARD)
+  lifeStage         String?          // "student" | "early-career" | "family" | "pre-retirement"
+  totalXP           Int              @default(0)
+  valCoins          Int              @default(0)
+  currentLevel      Int              @default(1)
+  weeklyStreakCount  Int             @default(0)
+  streakFreezeCount Int             @default(0)
+  hasSeenIntro      Boolean          @default(false)
+  lastStreakWeek    String?                           // ISO week key e.g. "2026-W18"
+  /** Pseudonym onboarding — null until user picks a display name via /onboarding */
+  pseudonymChosenAt DateTime?
+  role              Role             @default(USER)
+  createdAt         DateTime         @default(now())
+  updatedAt         DateTime         @updatedAt
+
+  // Auth.js relations
+  accounts        Account[]
+  sessions        Session[]
+
+  // Game relations
+  attempts        Attempt[]
+  masteries       Mastery[]
+  badges          UserBadge[]
+  coinTxns        CoinTxn[]
+  pledges         Pledge[]
+
+  // Social relations
+  friendRequestsSent     Friendship[]     @relation("FriendRequester")
+  friendRequestsReceived Friendship[]    @relation("FriendAddressee")
+  boostsSent              FriendBoost[]   @relation("BoostSender")
+  boostsReceived          FriendBoost[]   @relation("BoostRecipientPair")
+  boostsNotifications     BoostNotification[] @relation("BoostRecipient")
+  weeklyXpSnapshots       UserWeeklyXp[]
+  ownedGroups             FamilyGroup[]   @relation("GroupOwner")
+  groupMemberships FamilyMembership[]
+  tournamentEntries TournamentEntry[]
+
+  // Shop relations
+  cosmeticOwnerships CosmeticOwnership[]
+  charityDonations   CharityDonation[]
+
+  @@index([email])
+  @@index([role])
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// Curriculum
+// ═══════════════════════════════════════════════════════════════════════════
+
+model World {
+  id            String   @id          // e.g. "marina-mile"
+  slug          String   @unique
+  orderIndex    Int
+  nameEn        String
+  nameAr        String
+  themeKey      String                // CSS/design theme identifier
+  descriptionEn String   @db.Text
+  descriptionAr String   @db.Text
+  isLocked      Boolean  @default(true)
+
+  nodes Node[]
+
+  @@index([orderIndex])
+}
+
+model Node {
+  id         String   @id @default(cuid())
+  worldId    String
+  world      World    @relation(fields: [worldId], references: [id])
+  orderIndex Int
+  kind       NodeKind @default(QUIZ)
+  titleEn    String
+  titleAr    String
+
+  questions  Question[]
+  attempts   Attempt[]
+  masteries  Mastery[]
+
+  @@index([worldId, orderIndex])
+}
+
+model Question {
+  id            String       @id @default(cuid())
+  nodeId        String
+  node          Node         @relation(fields: [nodeId], references: [id])
+  orderIndex    Int
+  kind          QuestionKind @default(SINGLE)
+  promptEn      String       @db.Text
+  promptAr      String       @db.Text
+  explanationEn String       @db.Text
+  explanationAr String       @db.Text
+  contentTrack  ContentTrack @default(NEUTRAL)
+
+  choices Choice[]
+
+  @@index([nodeId, orderIndex])
+  @@index([contentTrack])
+}
+
+model Choice {
+  id         String   @id @default(cuid())
+  questionId String
+  question   Question @relation(fields: [questionId], references: [id])
+  textEn     String
+  textAr     String
+  isCorrect  Boolean  @default(false)
+
+  @@index([questionId])
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// Progress & Mastery
+// ═══════════════════════════════════════════════════════════════════════════
+
+model Attempt {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  nodeId      String
+  node        Node     @relation(fields: [nodeId], references: [id])
+  score       Int                         // 0–100
+  durationMs  Int                         // milliseconds taken
+  completedAt DateTime @default(now())
+
+  @@index([userId])
+  @@index([nodeId])
+  @@index([userId, nodeId])
+  @@index([completedAt])
+}
+
+model Mastery {
+  id           String   @id @default(cuid())
+  userId       String
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  nodeId       String
+  node         Node     @relation(fields: [nodeId], references: [id])
+  intervalDays Int      @default(7)              // SM-2: 7 → 30 → 90 → 180
+  nextReviewAt DateTime
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@unique([userId, nodeId])
+  @@index([userId, nextReviewAt])
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// Gamification
+// ═══════════════════════════════════════════════════════════════════════════
+
+model Badge {
+  id       String     @id @default(cuid())
+  slug     String     @unique
+  nameEn   String
+  nameAr   String
+  kind     BadgeKind  @default(GENERAL)
+  tier     BadgeTier?                            // null for non-tiered badges
+  iconKey  String                                // Lucide icon name or custom key
+  isHidden Boolean    @default(false)
+
+  users    UserBadge[]
+}
+
+model UserBadge {
+  id       String   @id @default(cuid())
+  userId   String
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  badgeId  String
+  badge    Badge    @relation(fields: [badgeId], references: [id])
+  earnedAt DateTime @default(now())
+
+  @@unique([userId, badgeId])
+  @@index([userId])
+}
+
+model CoinTxn {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  delta     Int                            // positive = earn, negative = spend
+  reason    String                         // e.g. "node_complete", "charity_donation"
+  refId     String?                        // optional ref to source entity (nodeId, pledgeId…)
+  createdAt DateTime @default(now())
+
+  // VAL Coins are NEVER redeemable to bank products — enforced at app layer
+
+  @@index([userId])
+  @@index([userId, createdAt])
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// Social
+// ═══════════════════════════════════════════════════════════════════════════
+
+model Friendship {
+  id          String           @id @default(cuid())
+  requesterId String
+  addresseeId String
+  requester   User             @relation("FriendRequester", fields: [requesterId], references: [id], onDelete: Cascade)
+  addressee   User             @relation("FriendAddressee", fields: [addresseeId], references: [id], onDelete: Cascade)
+  status      FriendshipStatus @default(PENDING)
+  createdAt   DateTime         @default(now())
+
+  @@unique([requesterId, addresseeId])
+  @@index([addresseeId, status])
+  @@index([requesterId, status])
+}
+
+/** XP earned during an ISO calendar week — used for friend leaderboards */
+model UserWeeklyXp {
+  userId   String
+  weekIso  String // e.g. "2026-W18"
+  xpEarned Int    @default(0)
+  user     User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([userId, weekIso])
+  @@index([weekIso, xpEarned(sort: Desc)])
+}
+
+/** Sent boosts between friends — used for weekly cap (5/week per sender). */
+model FriendBoost {
+  id          String   @id @default(cuid())
+  senderId    String
+  recipientId String
+  stickerKey  String
+  coins       Int
+  weekIso     String
+  createdAt   DateTime @default(now())
+  sender      User     @relation("BoostSender", fields: [senderId], references: [id], onDelete: Cascade)
+  recipient   User     @relation("BoostRecipientPair", fields: [recipientId], references: [id], onDelete: Cascade)
+
+  @@index([senderId, weekIso])
+  @@index([recipientId])
+}
+
+/** Login-time toast payloads for boosts — consumed when shown once. */
+model BoostNotification {
+  id           String    @id @default(cuid())
+  recipientId  String
+  senderId     String
+  stickerKey   String
+  coins        Int
+  senderName   String? // Pseudonym snapshot
+  createdAt    DateTime  @default(now())
+  consumedAt   DateTime?
+  recipient    User      @relation("BoostRecipient", fields: [recipientId], references: [id], onDelete: Cascade)
+
+  @@index([recipientId, consumedAt])
+}
+
+model FamilyGroup {
+  id         String @id @default(cuid())
+  name       String
+  ownerId    String
+  inviteCode String @unique @db.VarChar(6)
+  owner      User        @relation("GroupOwner", fields: [ownerId], references: [id])
+  createdAt DateTime @default(now())
+
+  members FamilyMembership[]
+
+  @@index([ownerId])
+}
+
+model FamilyMembership {
+  id       String      @id @default(cuid())
+  groupId  String
+  group    FamilyGroup @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  userId   String
+  user     User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  joinedAt DateTime    @default(now())
+
+  @@unique([groupId, userId])
+  @@index([userId])
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// Pledge (goal commitment with coin stake — charity only, no gambling)
+// ═══════════════════════════════════════════════════════════════════════════
+
+model Pledge {
+  id           String       @id @default(cuid())
+  userId       String
+  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  goalSlug     String                       // world slug or node id to complete
+  deadline     DateTime
+  coinsAtStake Int                          // held in escrow; donated to charity if lost
+  charitySlug  String                       // pre-approved charity list
+  status       PledgeStatus @default(ACTIVE)
+  createdAt    DateTime     @default(now())
+  resolvedAt   DateTime?                    // set when WON, LOST or CANCELLED
+
+  @@index([userId, status])
+  @@index([deadline])
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// Tournaments (anonymous cohort-based — no named public leaderboard)
+// ═══════════════════════════════════════════════════════════════════════════
+
+model WeeklyTournament {
+  id        String           @id @default(cuid())
+  weekIso   String                              // ISO week string e.g. "2026-W18"
+  cohortId  String                              // anonymous cohort grouping
+  isActive  Boolean          @default(true)
+
+  entries TournamentEntry[]
+
+  @@unique([weekIso, cohortId])
+  @@index([weekIso])
+}
+
+model TournamentEntry {
+  id           String           @id @default(cuid())
+  tournamentId String
+  tournament   WeeklyTournament @relation(fields: [tournamentId], references: [id])
+  userId       String
+  user         User             @relation(fields: [userId], references: [id])
+  xpThisWeek   Int              @default(0)
+
+  @@unique([tournamentId, userId])
+  // Rank is computed at query time, never stored (no named public leaderboard)
+  @@index([tournamentId, xpThisWeek(sort: Desc)])
+  @@index([userId])
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// Shop
+// ═══════════════════════════════════════════════════════════════════════════
+
+model CosmeticOwnership {
+  id          String       @id @default(cuid())
+  userId      String
+  user        User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  itemSlug    String                       // e.g. "avatar-desert-falcon"
+  itemKind    CosmeticKind
+  equippedAt  DateTime?                    // null = owned but not equipped
+  purchasedAt DateTime     @default(now())
+
+  @@unique([userId, itemSlug])
+  @@index([userId, itemKind])
+}
+
+model CharityDonation {
+  id             String   @id @default(cuid())
+  userId         String
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  charitySlug    String                    // e.g. "beit-al-khair"
+  coinsSpent     Int
+  aedEquivalent  Float                     // coinsSpent / 1000 * 1.0
+  createdAt      DateTime @default(now())
+
+  @@index([userId])
+  @@index([charitySlug, createdAt])
+}

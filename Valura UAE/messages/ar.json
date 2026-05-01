@@ -1,0 +1,66 @@
+{
+  "meta": {
+    "title": "فالورا — الصحة المالية",
+    "description": "طوّر معرفتك المالية مع فالورا."
+  },
+  "nav": {
+    "home": "الرئيسية",
+    "map": "خريطة الرحلة",
+    "profile": "الملف الشخصي",
+    "login": "تسجيل الدخول",
+    "register": "ابدأ الآن",
+    "logout": "تسجيل الخروج"
+  },
+  "disclaimer": {
+    "footer": "للأغراض التعليمية فقط، وليس نصيحة مالية."
+  },
+  "contentTrack": {
+    "label": "نوع التمويل",
+    "conventional": "تقليدي",
+    "islamic": "إسلامي"
+  },
+  "coins": {
+    "label": "عملات VAL",
+    "earned": "حصلت على {count} عملة VAL!"
+  },
+  "quiz": {
+    "correct": "إجابة صحيحة!",
+    "incorrect": "ليس تمامًا — إليك السبب:",
+    "continue": "متابعة",
+    "complete": "اكتملت المرحلة!"
+  },
+  "worlds": {
+    "marina-mile": "ميل المارينا",
+    "skyline-heights": "مرتفعات أفق المدينة",
+    "souk-of-savings": "سوق المدخرات",
+    "dirham-desert": "صحراء الدرهم",
+    "loan-lighthouse": "منارة القروض",
+    "card-canyon": "وادي البطاقات",
+    "oasis-of-insurance": "واحة التأمين",
+    "asset-atlas": "أطلس الأصول",
+    "skyline-keys": "مفاتيح الأفق",
+    "halal-harbour": "ميناء الحلال",
+    "gratuity-garden": "حديقة المكافآت",
+    "family-majlis": "مجلس العائلة",
+    "bridge-of-borders": "جسر الحدود",
+    "scam-sentinel": "حارس النصب",
+    "goal-garden": "حديقة الأهداف"
+  },
+  "auth": {
+    "email": "البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "name": "الاسم الكامل",
+    "loginTitle": "مرحبًا بعودتك",
+    "registerTitle": "ابدأ رحلتك",
+    "loginCta": "تسجيل الدخول",
+    "registerCta": "إنشاء حساب",
+    "noAccount": "ليس لديك حساب؟",
+    "hasAccount": "لديك حساب بالفعل؟",
+    "signUp": "إنشاء حساب",
+    "signIn": "تسجيل الدخول"
+  },
+  "errors": {
+    "generic": "حدث خطأ ما. يرجى المحاولة مرة أخرى.",
+    "notFound": "الصفحة غير موجودة."
+  }
+}

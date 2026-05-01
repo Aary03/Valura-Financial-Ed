@@ -1,0 +1,240 @@
+@import "tailwindcss";
+
+/* ─── Valura UAE — Brand Design Tokens ─────────────────────────────────────── */
+
+@theme {
+  /* Brand palette */
+  --color-navy:        #00111B;
+  --color-navy-50:     #E6F0F7;
+  --color-navy-100:    #B3D1E8;
+  --color-navy-200:    #80B2D9;
+  --color-navy-300:    #4D93CA;
+  --color-navy-400:    #1A74BB;
+  --color-navy-600:    #004477;
+  --color-navy-700:    #003055;
+  --color-navy-800:    #001C33;
+  --color-navy-900:    #00111B;
+
+  --color-green:       #05A049;
+  --color-green-50:    #E6F7EE;
+  --color-green-100:   #B3E8CC;
+  --color-green-200:   #80D9AA;
+  --color-green-300:   #4DCA88;
+  --color-green-400:   #1ABB66;
+  --color-green-600:   #047E3A;
+  --color-green-700:   #035C2A;
+  --color-green-800:   #023A1B;
+
+  --color-mint:        #B4E3C8;
+  --color-mint-light:  #D9F1E4;
+
+  --color-cream:       #FFFFFC;
+
+  --color-gold:        #D4A95A;
+  --color-gold-light:  #E8CBAB;
+  --color-gold-dark:   #A07C30;
+
+  /* Semantic surface tokens — overridden in [data-theme=dark] */
+  --color-background:  var(--bg);
+  --color-foreground:  var(--fg);
+  --color-surface:     var(--surface);
+  --color-border:      var(--border);
+  --color-muted:       var(--muted);
+
+  /* Typography */
+  --font-display:      "Bricolage Grotesque", sans-serif;
+  --font-heading:      "Manrope", sans-serif;
+  --font-body:         "Inter", sans-serif;
+  --font-arabic:       "IBM Plex Sans Arabic", sans-serif;
+
+  /* Border radius scale */
+  --radius-4xl:        2rem;
+  --radius-5xl:        2.5rem;
+
+  /* Custom keyframes */
+  --animate-fade-in:   fadeIn 0.4s ease-in-out;
+  --animate-slide-up:  slideUp 0.3s ease-out;
+  --animate-coin-pop:  coinPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  --animate-pulse-gold: pulseGold 2s ease-in-out infinite;
+}
+
+/* ─── Semantic colour variables (light mode default) ──────────────────────── */
+
+:root {
+  --bg:         #FFFFFC;
+  --fg:         #00111B;
+  --surface:    #ffffff;
+  --border:     #E2E8F0;
+  --muted:      #64748B;
+  /* Aliases used by some layout components that reference --background / --foreground */
+  --background: var(--bg);
+  --foreground: var(--fg);
+}
+
+/* Dark mode — toggled via data-theme="dark" on <html> */
+[data-theme="dark"] {
+  --bg:      #00111B;
+  --fg:      #FFFFFC;
+  --surface: #0D2233;
+  --border:  #1E3A4F;
+  --muted:   #94A3B8;
+}
+
+/* ─── Base styles ─────────────────────────────────────────────────────────── */
+
+body {
+  background-color: #F8FAFC;   /* Light base — pages set their own backgrounds */
+  color: var(--fg);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* RTL — Arabic locale */
+[dir="rtl"] {
+  font-family: var(--font-arabic);
+}
+
+/* Accessible focus ring */
+:focus-visible {
+  outline: 2px solid #05A049;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: #B4E3C8;
+  border-radius: 3px;
+}
+
+/* ─── Custom keyframes ────────────────────────────────────────────────────── */
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(16px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+@keyframes coinPop {
+  from { transform: scale(0) rotate(-20deg); opacity: 0; }
+  to   { transform: scale(1) rotate(0deg);   opacity: 1; }
+}
+
+@keyframes pulseGold {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(212,169,90,0.4); }
+  50%       { box-shadow: 0 0 0 8px rgba(212,169,90,0);  }
+}
+
+/* World node pulse ring — used in IntroCinematic and Level Map */
+@keyframes nodePulse {
+  0%   { transform: scale(1);   opacity: 0.45; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+
+/** Current-node halo — ping ring on the active journey node */
+@keyframes ping-slow {
+  0% { transform: scale(1); opacity: 0.4; }
+  100% { transform: scale(1.15); opacity: 0; }
+}
+
+.world-node-pulse {
+  animation: ping-slow 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes mint-shake-kf {
+  0%, 100% { transform: translateX(0); }
+  20%       { transform: translateX(-5px); }
+  40%       { transform: translateX(5px); }
+  60%       { transform: translateX(-4px); }
+  80%       { transform: translateX(4px); }
+}
+
+.answer-mint-shake {
+  animation: mint-shake-kf 0.42s ease-in-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .answer-mint-shake {
+    animation: none !important;
+  }
+}
+
+@keyframes journey-bounce-x {
+  0%, 100% { transform: translateX(0); }
+  50%      { transform: translateX(6px); }
+}
+
+@keyframes journey-cloud-drift-a {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-10%); }
+}
+
+@keyframes journey-falcon-glide-a {
+  0% { transform: translateX(-8%); }
+  100% { transform: translateX(108%); }
+}
+
+.journey-scroll-hint {
+  animation: journey-bounce-x 1.6s ease-in-out infinite;
+}
+
+.journey-cloud-drift {
+  animation: journey-cloud-drift-a 60s linear infinite;
+}
+
+.journey-falcon-glide {
+  transform-box: fill-box;
+  animation: journey-falcon-glide-a 90s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .journey-scroll-hint,
+  .journey-cloud-drift,
+  .journey-falcon-glide,
+  .world-node-pulse {
+    animation: none !important;
+  }
+}
+
+/* ─── Utility classes ─────────────────────────────────────────────────────── */
+
+@layer utilities {
+  /* Brand gradient text */
+  .text-gradient-gold {
+    background: linear-gradient(135deg, #D4A95A, #F5C872);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* VAL Coin shimmer surface */
+  .coin-shimmer {
+    background: linear-gradient(135deg, #D4A95A 0%, #F5C872 40%, #D4A95A 60%, #A07C30 100%);
+  }
+
+  /* Frosted glass card */
+  .glass {
+    background: rgba(255,255,252,0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,252,0.3);
+  }
+
+  /* CBUAE-required disclaimer typography */
+  .edu-disclaimer {
+    font-size: 0.75rem;
+    line-height: 1rem;
+    color: var(--muted);
+    text-align: center;
+  }
+
+  .text-balance { text-wrap: balance; }
+  .text-pretty  { text-wrap: pretty; }
+}

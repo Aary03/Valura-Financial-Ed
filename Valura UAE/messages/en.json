@@ -1,0 +1,66 @@
+{
+  "meta": {
+    "title": "Valura — Financial Wellness",
+    "description": "Level up your money knowledge with Valura."
+  },
+  "nav": {
+    "home": "Home",
+    "map": "Journey Map",
+    "profile": "Profile",
+    "login": "Log in",
+    "register": "Get started",
+    "logout": "Log out"
+  },
+  "disclaimer": {
+    "footer": "Educational only, not financial advice."
+  },
+  "contentTrack": {
+    "label": "Finance mode",
+    "conventional": "Conventional",
+    "islamic": "Islamic"
+  },
+  "coins": {
+    "label": "VAL Coins",
+    "earned": "{count} VAL Coins earned!"
+  },
+  "quiz": {
+    "correct": "Correct!",
+    "incorrect": "Not quite — here's why:",
+    "continue": "Continue",
+    "complete": "Level complete!"
+  },
+  "worlds": {
+    "marina-mile": "Marina Mile",
+    "skyline-heights": "Skyline Heights",
+    "souk-of-savings": "Souk of Savings",
+    "dirham-desert": "Dirham Desert",
+    "loan-lighthouse": "Loan Lighthouse",
+    "card-canyon": "Card Canyon",
+    "oasis-of-insurance": "Oasis of Insurance",
+    "asset-atlas": "Asset Atlas",
+    "skyline-keys": "Skyline Keys",
+    "halal-harbour": "Halal Harbour",
+    "gratuity-garden": "Gratuity Garden",
+    "family-majlis": "Family Majlis",
+    "bridge-of-borders": "Bridge of Borders",
+    "scam-sentinel": "Scam Sentinel",
+    "goal-garden": "Goal Garden"
+  },
+  "auth": {
+    "email": "Email",
+    "password": "Password",
+    "name": "Full name",
+    "loginTitle": "Welcome back",
+    "registerTitle": "Start your journey",
+    "loginCta": "Log in",
+    "registerCta": "Create account",
+    "noAccount": "Don't have an account?",
+    "hasAccount": "Already have an account?",
+    "signUp": "Sign up",
+    "signIn": "Sign in"
+  },
+  "errors": {
+    "generic": "Something went wrong. Please try again.",
+    "notFound": "Page not found."
+  }
+}
