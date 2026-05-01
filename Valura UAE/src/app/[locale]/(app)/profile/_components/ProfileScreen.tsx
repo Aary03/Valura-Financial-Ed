@@ -186,7 +186,7 @@ export default function ProfileScreen({ locale, user, masteryData, badges }: Pro
   return (
     <div
       className="flex flex-col min-h-screen"
-      style={{ background: "#F8FAFC" }}
+      style={{ background: "linear-gradient(180deg, #FFFFFC 0%, #F5FAF6 35%, #E9F4EC 75%, #DCEEDF 100%)" }}
       dir={isAr ? "rtl" : "ltr"}
     >
       {/* ── Header ────────────────────────────────────────────────── */}

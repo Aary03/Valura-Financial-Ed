@@ -40,11 +40,22 @@ type Props = {
 };
 
 export async function generateMetadata({ params: { locale } }: Props): Promise<Metadata> {
-  const t = await getTranslations({ locale, namespace: "meta" });
+  const isAr = locale === "ar";
+  const title = isAr
+    ? "Aldar × Valura Atlas | رحلة الصحة المالية"
+    : "Aldar × Valura Atlas | Financial Wellness Journey";
+  const description = isAr
+    ? "رحلة للصحة المالية للجميع في الإمارات — ثنائية اللغة، متوافقة مع الشريعة."
+    : "A bilingual, Sharia-aware financial wellness platform built for everyone in the UAE.";
   return {
-    title: t("title"),
-    description: t("description"),
+    title,
+    description,
     metadataBase: new URL("https://valura.ae"),
+    openGraph: {
+      title,
+      description,
+      siteName: "Aldar × Valura Atlas",
+    },
   };
 }
 

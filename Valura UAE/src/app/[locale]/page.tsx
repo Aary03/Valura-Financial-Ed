@@ -1,131 +1,433 @@
 import Link from "next/link";
-import { getTranslations } from "next-intl/server";
-import { Sparkles, ChevronRight, BookOpen, Coins, Globe } from "lucide-react";
+import { BookOpen, Globe, ShieldCheck, ChevronRight } from "lucide-react";
+import Wordmark from "@/components/brand/Wordmark";
 
-export default async function HomePage({
+export default function HomePage({
   params: { locale },
 }: {
   params: { locale: string };
 }) {
-  const t     = await getTranslations({ locale, namespace: "nav" });
-  const tMeta = await getTranslations({ locale, namespace: "meta" });
-  const isAr  = locale === "ar";
-
-  const features = [
-    { icon: <BookOpen className="size-4" />, en: "15 Financial Worlds",  ar: "15 عالماً مالياً"   },
-    { icon: <Coins    className="size-4" />, en: "Earn VAL Coins",       ar: "اكسب عملات VAL"     },
-    { icon: <Globe    className="size-4" />, en: "Arabic & English",     ar: "عربي وإنجليزي"       },
-    { icon: <Sparkles className="size-4" />, en: "UAE-rooted content",   ar: "محتوى إماراتي الجذور" },
-  ];
+  const isAr = locale === "ar";
 
   return (
-    <main
-      className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 py-16"
-      style={{ background: "linear-gradient(160deg, #C8E2F5 0%, #DFF0FA 25%, #F5F9FE 55%, #FFF5E8 80%, #FFE8C0 100%)" }}
+    <div
+      className="min-h-screen"
+      style={{
+        background:
+          "linear-gradient(180deg, #FFFFFC 0%, #F5FAF6 35%, #E9F4EC 75%, #DCEEDF 100%)",
+      }}
       dir={isAr ? "rtl" : "ltr"}
     >
-      {/* ── Ambient background blobs ─────────────────────────────── */}
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
+      {/* ── Top nav ───────────────────────────────────────────────── */}
+      <nav
+        className="sticky top-0 z-50 flex items-center justify-between py-5 px-6 sm:px-12"
+        style={{
+          background: "rgba(255,255,252,0.88)",
+          backdropFilter: "blur(12px)",
+          borderBottom: "1px solid #E2E8F0",
+        }}
+      >
+        <Wordmark variant="full" size="md" />
+        <Link
+          href={`/${locale}/sign-in`}
+          className="font-body text-sm font-medium transition-colors hover:text-[#00111B]"
+          style={{ color: "#475569" }}
+        >
+          {isAr ? "تسجيل الدخول" : "Sign in"}
+        </Link>
+      </nav>
+
+      {/* ── Hero section ──────────────────────────────────────────── */}
+      <section className="relative flex min-h-[calc(100vh-73px)] flex-col items-center justify-center overflow-hidden px-6 py-24 text-center">
+        {/* Warm sun glow */}
         <div
-          className="absolute rounded-full"
+          className="pointer-events-none absolute"
+          aria-hidden
           style={{
-            top: "-10%", left: "50%", transform: "translateX(-50%)",
-            width: 600, height: 600,
-            background: "radial-gradient(circle, rgba(5,160,73,0.08) 0%, transparent 65%)",
+            top: "5%",
+            right: "10%",
+            width: 500,
+            height: 500,
+            background:
+              "radial-gradient(ellipse at center, rgba(245,220,160,0.22) 0%, transparent 70%)",
+            borderRadius: "50%",
           }}
         />
-        <div
-          className="absolute rounded-full"
-          style={{
-            bottom: "-5%", right: "5%",
-            width: 350, height: 350,
-            background: "radial-gradient(circle, rgba(212,169,90,0.12) 0%, transparent 65%)",
-          }}
-        />
-      </div>
 
-      {/* ── Content ───────────────────────────────────────────────── */}
-      <div className="relative z-10 flex w-full max-w-md flex-col items-center gap-10 text-center">
-
-        {/* Wordmark */}
-        <div className="flex flex-col items-center gap-3">
-          <div
-            className="flex size-16 items-center justify-center rounded-3xl mb-1"
-            style={{
-              background: "linear-gradient(135deg, #05A049 0%, #059669 100%)",
-              boxShadow: "0 0 40px rgba(5,160,73,0.35)",
-            }}
-          >
-            <span className="font-display text-2xl font-extrabold" style={{ color: "#FFFFFC" }}>V</span>
+        <div className="relative z-10 mx-auto max-w-4xl">
+          {/* Eyebrow */}
+          <div className="mb-8 flex items-center justify-center gap-3">
+            <div className="h-px w-12 bg-[#05A049] opacity-40" />
+            <span
+              className="font-body text-[11px] font-semibold uppercase tracking-widest"
+              style={{ color: "#05A049" }}
+            >
+              {isAr ? "رحلة الصحة المالية" : "Financial Wellness Journey"}
+            </span>
+            <div className="h-px w-12 bg-[#05A049] opacity-40" />
           </div>
+
+          {/* Headline */}
           <h1
-            className="font-display text-5xl font-bold tracking-tight"
+            className="mb-6 font-display leading-[1.05]"
             style={{
-              background: "linear-gradient(135deg, #D4A95A 0%, #F5C872 50%, #D4A95A 100%)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
+              fontFamily: "'Bricolage Grotesque', sans-serif",
+              fontWeight: 600,
+              fontSize: "clamp(48px, 8vw, 80px)",
+              color: "#00111B",
+              letterSpacing: "-0.03em",
             }}
           >
-            Valura
+            {isAr ? (
+              <>
+                إتقان المال.
+                <br />
+                مستوى تلو الآخر.
+              </>
+            ) : (
+              <>
+                Money, mastered.
+                <br />
+                One level at a time.
+              </>
+            )}
           </h1>
-          <p className="font-body text-base max-w-[280px] leading-relaxed" style={{ color: "#475569" }}>
-            {isAr ? "مهاراتك المالية. بالدرهم. بالعربي." : tMeta("description")}
+
+          {/* Sub-headline */}
+          <p
+            className="mx-auto mb-10 max-w-2xl leading-relaxed"
+            style={{
+              fontFamily: "'Inter', sans-serif",
+              fontSize: 19,
+              color: "#475569",
+            }}
+          >
+            {isAr
+              ? "منصة للصحة المالية باللغتين العربية والإنجليزية، متوافقة مع الشريعة الإسلامية، مبنية لكل من في الإمارات."
+              : "A bilingual, Sharia-aware financial wellness platform built for everyone in the UAE — from your first salary to your end-of-service planning."}
+          </p>
+
+          {/* CTA buttons */}
+          <div className="mb-6 flex flex-wrap items-center justify-center gap-4">
+            <Link
+              href={`/${locale}/sign-in`}
+              className="flex h-12 items-center gap-2 rounded-xl px-8 transition-all active:scale-[0.98]"
+              style={{
+                background: "#05A049",
+                color: "#FFFFFF",
+                fontFamily: "'Manrope', sans-serif",
+                fontWeight: 600,
+                fontSize: 15,
+                boxShadow: "0 4px 12px rgba(5,160,73,0.25)",
+              }}
+              onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.background = "#03803A")}
+              onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.background = "#05A049")}
+            >
+              {isAr ? "ابدأ رحلتك ←" : "Start your journey →"}
+            </Link>
+            <Link
+              href={`/${locale}/pitch`}
+              className="flex h-12 items-center gap-2 rounded-xl border px-8 transition-all active:scale-[0.98]"
+              style={{
+                background: "#FFFFFF",
+                border: "1.5px solid #E2E8F0",
+                color: "#00111B",
+                fontFamily: "'Manrope', sans-serif",
+                fontWeight: 600,
+                fontSize: 15,
+              }}
+            >
+              {isAr ? "للبنوك: عرض الفرصة" : "For banks: see the pitch"}
+            </Link>
+          </div>
+
+          {/* Caption */}
+          <p
+            style={{
+              fontFamily: "'Inter', sans-serif",
+              fontSize: 13,
+              color: "#94A3B8",
+            }}
+          >
+            {isAr
+              ? "شراكة Aldar × Valura · مجاني لجميع العملاء"
+              : "An Aldar × Valura partnership · Free for all customers"}
           </p>
         </div>
 
-        {/* Feature pills */}
-        <div className="flex flex-wrap justify-center gap-2">
-          {features.map(({ icon, en, ar }) => (
-            <span
-              key={en}
-              className="flex items-center gap-1.5 rounded-full px-3 py-1.5 font-body text-xs font-medium"
+        {/* Decorative journey map preview */}
+        <div
+          className="pointer-events-none absolute bottom-0 left-1/2 -translate-x-1/2 opacity-[0.07]"
+          aria-hidden
+          style={{ width: "min(900px, 90vw)" }}
+        >
+          <svg viewBox="0 0 900 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M 0 80 Q 150 40 300 80 T 600 60 T 900 70"
+              stroke="#05A049"
+              strokeWidth="3"
+              strokeDasharray="12 6"
+              fill="none"
+            />
+            {[150, 450, 750].map((cx) => (
+              <g key={cx}>
+                <circle cx={cx} cy={cx === 150 ? 60 : cx === 450 ? 68 : 58} r={14} fill="#05A049" />
+                <circle cx={cx} cy={cx === 150 ? 60 : cx === 450 ? 68 : 58} r={10} fill="#DCEEDF" />
+              </g>
+            ))}
+          </svg>
+        </div>
+      </section>
+
+      {/* ── Cast strip ────────────────────────────────────────────── */}
+      <section className="py-20 px-6 sm:px-12">
+        <div className="mx-auto max-w-5xl">
+          <h2
+            className="mb-12 text-center"
+            style={{
+              fontFamily: "'Bricolage Grotesque', sans-serif",
+              fontWeight: 600,
+              fontSize: 36,
+              color: "#00111B",
+              letterSpacing: "-0.02em",
+            }}
+          >
+            {isAr ? "مبني حول أشخاص حقيقيين في الإمارات" : "Built around real people in the UAE"}
+          </h2>
+
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {CAST.map((person) => (
+              <div
+                key={person.name}
+                className="rounded-3xl p-8"
+                style={{
+                  background: "#FFFFFF",
+                  border: "1px solid #E2E8F0",
+                  boxShadow:
+                    "0 1px 2px rgba(0,17,27,0.04), 0 4px 12px rgba(0,17,27,0.04), 0 12px 32px rgba(0,17,27,0.06)",
+                }}
+              >
+                <div
+                  className="mb-4 flex size-16 items-center justify-center rounded-full"
+                  style={{ background: person.bg }}
+                >
+                  <span
+                    style={{
+                      fontFamily: "'Manrope', sans-serif",
+                      fontWeight: 700,
+                      fontSize: 24,
+                      color: person.color,
+                    }}
+                  >
+                    {person.initial}
+                  </span>
+                </div>
+                <p
+                  className="mb-0.5"
+                  style={{
+                    fontFamily: "'Manrope', sans-serif",
+                    fontWeight: 600,
+                    fontSize: 18,
+                    color: "#00111B",
+                  }}
+                >
+                  {person.name}
+                </p>
+                <p
+                  className="mb-4"
+                  style={{
+                    fontFamily: "'Inter', sans-serif",
+                    fontSize: 13,
+                    color: "#475569",
+                  }}
+                >
+                  {isAr ? person.roleAr : person.role}
+                </p>
+                <p
+                  className="italic leading-snug"
+                  style={{
+                    fontFamily: "'Inter', sans-serif",
+                    fontSize: 14,
+                    color: "#1E293B",
+                  }}
+                >
+                  &ldquo;{isAr ? person.quoteAr : person.quote}&rdquo;
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Why it works ──────────────────────────────────────────── */}
+      <section className="py-20 px-6 sm:px-12">
+        <div className="mx-auto max-w-4xl">
+          <h2
+            className="mb-12 text-center"
+            style={{
+              fontFamily: "'Bricolage Grotesque', sans-serif",
+              fontWeight: 600,
+              fontSize: 36,
+              color: "#00111B",
+              letterSpacing: "-0.02em",
+            }}
+          >
+            {isAr ? "لماذا يعمل هذا" : "Why it works"}
+          </h2>
+
+          <div className="grid gap-6 sm:grid-cols-3">
+            {WHY_ITEMS.map((item) => (
+              <div
+                key={item.headlineEn}
+                className="rounded-2xl p-8 text-center"
+                style={{
+                  background: "#FFFFFF",
+                  border: "1px solid #E2E8F0",
+                  boxShadow:
+                    "0 1px 2px rgba(0,17,27,0.04), 0 4px 12px rgba(0,17,27,0.04), 0 12px 32px rgba(0,17,27,0.06)",
+                }}
+              >
+                <div
+                  className="mx-auto mb-5 flex size-16 items-center justify-center rounded-full"
+                  style={{ background: "#EDFFF5" }}
+                >
+                  <item.Icon size={28} color="#05A049" strokeWidth={1.75} />
+                </div>
+                <p
+                  className="mb-2"
+                  style={{
+                    fontFamily: "'Manrope', sans-serif",
+                    fontWeight: 600,
+                    fontSize: 18,
+                    color: "#00111B",
+                  }}
+                >
+                  {isAr ? item.headlineAr : item.headlineEn}
+                </p>
+                <p
+                  style={{
+                    fontFamily: "'Inter', sans-serif",
+                    fontSize: 14,
+                    color: "#475569",
+                    lineHeight: 1.6,
+                  }}
+                >
+                  {isAr ? item.bodyAr : item.bodyEn}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Footer ────────────────────────────────────────────────── */}
+      <footer
+        className="mt-8 border-t px-6 py-12 sm:px-12"
+        style={{ borderColor: "#E2E8F0" }}
+      >
+        <div className="mx-auto flex max-w-5xl flex-col items-start justify-between gap-8 sm:flex-row sm:items-center">
+          <div className="space-y-2">
+            <Wordmark variant="full" size="sm" />
+            <p
+              className="max-w-sm leading-relaxed"
               style={{
-                background: "rgba(255,255,252,0.75)",
-                border: "1px solid rgba(5,160,73,0.18)",
-                color: "#059669",
-                backdropFilter: "blur(8px)",
+                fontFamily: "'Inter', sans-serif",
+                fontSize: 12,
+                color: "#94A3B8",
               }}
             >
-              {icon}
-              {isAr ? ar : en}
-            </span>
-          ))}
+              {isAr
+                ? "تعليمي فقط، ليس نصيحة مالية. عملات VAL افتراضية — للتجميل والخير فقط، غير قابلة للاسترداد. شراكة Aldar × Valura."
+                : "Educational only, not financial advice. VAL Coins are virtual — for cosmetics and charity only, never redeemable. An Aldar × Valura partnership."}
+            </p>
+          </div>
+          <div className="flex gap-6">
+            {["Privacy", "Terms", "Contact"].map((l) => (
+              <Link
+                key={l}
+                href="#"
+                className="transition-colors hover:text-[#00111B]"
+                style={{
+                  fontFamily: "'Inter', sans-serif",
+                  fontSize: 13,
+                  color: "#94A3B8",
+                }}
+              >
+                {l}
+              </Link>
+            ))}
+          </div>
         </div>
-
-        {/* CTA buttons */}
-        <div className="flex w-full flex-col gap-3">
-          <Link
-            href={`/${locale}/sign-in`}
-            className="flex items-center justify-center gap-2 rounded-2xl py-4 font-heading text-sm font-bold transition-all hover:brightness-110 active:scale-98"
-            style={{
-              background: "linear-gradient(135deg, #05A049 0%, #059669 100%)",
-              color: "#FFFFFC",
-              boxShadow: "0 4px 20px rgba(5,160,73,0.30)",
-            }}
-          >
-            <Sparkles className="size-4" aria-hidden="true" />
-            {isAr ? "ابدأ مجاناً" : t("register")}
-          </Link>
-          <Link
-            href={`/${locale}/sign-in`}
-            className="flex items-center justify-center gap-2 rounded-2xl py-4 font-heading text-sm font-semibold transition-all hover:bg-white/40"
-            style={{
-              background: "rgba(255,255,252,0.65)",
-              border: "1.5px solid rgba(0,17,27,0.12)",
-              color: "#475569",
-              backdropFilter: "blur(8px)",
-            }}
-          >
-            {isAr ? "تسجيل الدخول" : t("login")}
-          </Link>
-        </div>
-
-        {/* Disclaimer */}
-        <p className="font-body text-xs max-w-[260px] leading-relaxed" style={{ color: "rgba(0,17,27,0.35)" }}>
-          {isAr ? "تعليمي فقط، ليس نصيحة مالية." : "Educational only, not financial advice."}
-        </p>
-      </div>
-    </main>
+      </footer>
+    </div>
   );
 }
+
+// ── Static data ────────────────────────────────────────────────────────────────
+
+const CAST = [
+  {
+    initial: "M",
+    name: "Mohammed",
+    role: "Emirati, government",
+    roleAr: "إماراتي، قطاع حكومي",
+    bg: "#EDFFF5",
+    color: "#059669",
+    quote: "I never knew what an emergency fund actually meant until Atlas showed me.",
+    quoteAr: "لم أكن أعرف ما يعني صندوق الطوارئ حتى شرحه لي الأطلس.",
+  },
+  {
+    initial: "R",
+    name: "Riya",
+    role: "Indian expat, engineer",
+    roleAr: "مغتربة هندية، مهندسة",
+    bg: "#E8F4FF",
+    color: "#1A6BAD",
+    quote: "Planning for gratuity while paying rent felt impossible. Now I have a system.",
+    quoteAr: "كان التخطيط للمكافأة مع دفع الإيجار مستحيلاً. الآن لدي نظام.",
+  },
+  {
+    initial: "F",
+    name: "Fatima",
+    role: "Emirati, teacher",
+    roleAr: "إماراتية، معلمة",
+    bg: "#FFF8E8",
+    color: "#A07C30",
+    quote: "The Sharia module finally explained things in a way that felt right for me.",
+    quoteAr: "وحدة الشريعة أخيراً شرحت الأمور بطريقة تناسبني.",
+  },
+  {
+    initial: "A",
+    name: "Arjun",
+    role: "Indian expat, retail",
+    roleAr: "مغترب هندي، تجزئة",
+    bg: "#EDFFF5",
+    color: "#0D7A5A",
+    quote: "Sending money home while saving here — Atlas made both feel possible.",
+    quoteAr: "إرسال الأموال للوطن مع الادخار هنا — أطلس جعل الأمرين ممكنين.",
+  },
+];
+
+const WHY_ITEMS = [
+  {
+    Icon: Globe,
+    headlineEn: "Bilingual EN / AR",
+    headlineAr: "ثنائي اللغة: عربي وإنجليزي",
+    bodyEn: "Switch languages mid-session. Every lesson, quiz, and story is native in both.",
+    bodyAr: "غيّر اللغة في أي وقت. كل درس واختبار وقصة أصيل في كلتا اللغتين.",
+  },
+  {
+    Icon: ShieldCheck,
+    headlineEn: "Sharia-aware curriculum",
+    headlineAr: "منهج متوافق مع الشريعة",
+    bodyEn: "Covers Islamic finance, riba, takaful, and Sharia-compliant investing — no shortcuts.",
+    bodyAr: "يغطي التمويل الإسلامي، الربا، التكافل، والاستثمار المتوافق مع الشريعة.",
+  },
+  {
+    Icon: BookOpen,
+    headlineEn: "VAL Coins for good",
+    headlineAr: "عملات VAL للخير",
+    bodyEn: "Coins unlock cosmetics and real charity donations — never redeemable for cash.",
+    bodyAr: "العملات تفتح التخصيصات والتبرعات الحقيقية — غير قابلة للاسترداد نقداً أبداً.",
+  },
+];

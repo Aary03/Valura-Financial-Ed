@@ -23,15 +23,15 @@ const BANNER_THEME: Record<string, { from: string; to: string; tint: string }> =
 
 interface WorldBannerProps {
   bannerKey: string;
-  nameEn: string;
+  nameEn?: string;
   className?: string;
 }
 
 /**
  * Light, on-brand hero banner — cream-to-tint gradient + centred world emblem.
- * Replaces the old dark night-sky banners.
+ * No ghosted watermark text — just the emblem and gradient.
  */
-export default function WorldBanner({ bannerKey, nameEn, className }: WorldBannerProps) {
+export default function WorldBanner({ bannerKey, className }: WorldBannerProps) {
   const theme  = BANNER_THEME[bannerKey] ?? BANNER_THEME["marina-mile"]!;
   const emblem = WORLD_EMBLEMS[bannerKey];
 
@@ -64,19 +64,6 @@ export default function WorldBanner({ bannerKey, nameEn, className }: WorldBanne
         }}
         aria-hidden
       />
-
-      {/* Faded world name watermark */}
-      <div
-        className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden"
-        aria-hidden
-      >
-        <span
-          className="select-none whitespace-nowrap font-display text-[clamp(48px,9vw,84px)] font-bold uppercase tracking-tight"
-          style={{ color: theme.tint, opacity: 0.04 }}
-        >
-          {nameEn}
-        </span>
-      </div>
 
       {/* Centred emblem */}
       <div className="relative flex h-full items-center justify-center py-8">

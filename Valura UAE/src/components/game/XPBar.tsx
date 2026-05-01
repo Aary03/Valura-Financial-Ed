@@ -10,25 +10,30 @@ interface XPBarProps {
 }
 
 /**
- * Compact XP strip for the HUD — 180px track, “current / 500 XP” label.
+ * Compact XP strip for the HUD — 220px track, "current / 500 XP" label at 13px.
  */
 export default function XPBar({ totalXP, currentLevel }: XPBarProps) {
   const xpInCurrentLevel = totalXP % XP_PER_LEVEL;
   const percent = Math.min((xpInCurrentLevel / XP_PER_LEVEL) * 100, 100);
 
   return (
-    <div className="mt-1 w-[180px]">
+    <div className="mt-1 w-[220px]">
       <div className="flex justify-end">
         <span
-          className="font-body text-[11px] tabular-nums"
-          style={{ color: "#94A3B8" }}
+          className="font-body tabular-nums"
+          style={{
+            fontFamily: "'Inter', sans-serif",
+            fontSize: 12,
+            fontWeight: 500,
+            color: "#94A3B8",
+          }}
         >
           {xpInCurrentLevel} / {XP_PER_LEVEL} XP
         </span>
       </div>
       <div
-        className="mt-0.5 h-1.5 w-full overflow-hidden rounded-full"
-        style={{ background: "#F0F4F8" }}
+        className="mt-0.5 w-full overflow-hidden rounded-full"
+        style={{ height: 8, background: "#F0F4F8" }}
         role="progressbar"
         aria-valuenow={xpInCurrentLevel}
         aria-valuemin={0}

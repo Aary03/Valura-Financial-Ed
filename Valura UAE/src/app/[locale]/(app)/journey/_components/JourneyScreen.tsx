@@ -51,7 +51,7 @@ export default function JourneyScreen({
     <div
       className="relative flex min-h-0 min-h-[100dvh] flex-1 flex-col overflow-hidden"
       style={{
-        background: "linear-gradient(180deg, #FFFFFC 0%, #F0F9F2 100%)",
+        background: "linear-gradient(180deg, #FFFFFC 0%, #F5FAF6 35%, #E9F4EC 75%, #DCEEDF 100%)",
       }}
     >
       <div

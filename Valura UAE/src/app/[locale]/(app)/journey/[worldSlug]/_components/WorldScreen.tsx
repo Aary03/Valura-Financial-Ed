@@ -173,7 +173,7 @@ export default function WorldScreen({ world, locale }: WorldScreenProps) {
       <div
         className="relative min-h-screen"
         dir={isAr ? "rtl" : "ltr"}
-        style={{ background: "linear-gradient(180deg, #FFFFFC 0%, #F0F9F2 100%)" }}
+        style={{ background: "linear-gradient(180deg, #FFFFFC 0%, #F5FAF6 35%, #E9F4EC 75%, #DCEEDF 100%)" }}
       >
         {/* Dot-grid background */}
         <div

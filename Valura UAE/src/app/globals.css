@@ -83,7 +83,9 @@
 /* ─── Base styles ─────────────────────────────────────────────────────────── */
 
 body {
-  background-color: #F8FAFC;   /* Light base — pages set their own backgrounds */
+  /* Pages use the brand gradient; this is only a fallback */
+  background: linear-gradient(180deg, #FFFFFC 0%, #F5FAF6 35%, #E9F4EC 75%, #DCEEDF 100%);
+  background-attachment: fixed;
   color: var(--fg);
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
@@ -237,4 +239,80 @@ body {
 
   .text-balance { text-wrap: balance; }
   .text-pretty  { text-wrap: pretty; }
+
+  /* Brand page background — apply to every page <main> or root wrapper */
+  .page-bg {
+    background: linear-gradient(180deg, #FFFFFC 0%, #F5FAF6 35%, #E9F4EC 75%, #DCEEDF 100%);
+    min-height: 100dvh;
+  }
+
+  /* Cushioned card — apply to all white card surfaces */
+  .card-cushion {
+    background: #FFFFFF;
+    border-radius: 20px;
+    border: 1px solid #E2E8F0;
+    box-shadow:
+      0 1px 2px rgba(0, 17, 27, 0.04),
+      0 4px 12px rgba(0, 17, 27, 0.04),
+      0 12px 32px rgba(0, 17, 27, 0.06);
+  }
+
+  /* Global button system */
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 48px;
+    padding: 0 24px;
+    border-radius: 12px;
+    background: #05A049;
+    color: #FFFFFF;
+    font-family: 'Manrope', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(5, 160, 73, 0.25);
+    transition: all 150ms ease-out;
+  }
+  .btn-primary:hover  { background: #03803A; box-shadow: 0 6px 16px rgba(5, 160, 73, 0.35); }
+  .btn-primary:active { background: #026E32; transform: scale(0.98); }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 48px;
+    padding: 0 24px;
+    border-radius: 12px;
+    background: #FFFFFF;
+    color: #00111B;
+    font-family: 'Manrope', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    border: 1.5px solid #E2E8F0;
+    cursor: pointer;
+    transition: all 150ms ease-out;
+  }
+  .btn-secondary:hover  { border-color: #05A049; background: #F0F9F2; }
+  .btn-secondary:active { transform: scale(0.98); }
+
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 48px;
+    padding: 0 24px;
+    border-radius: 12px;
+    background: transparent;
+    color: #475569;
+    font-family: 'Manrope', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    border: none;
+    cursor: pointer;
+    transition: all 150ms ease-out;
+  }
+  .btn-ghost:hover  { background: #F0F9F2; color: #00111B; }
+  .btn-ghost:active { transform: scale(0.98); }
 }

@@ -94,7 +94,7 @@ export default function FriendsScreen({ locale, initial }: FriendsScreenProps) {
   const showPercentBand = data.friends.length > 0 && data.topPercentBand != null;
 
   return (
-    <div className="min-h-screen" dir={isAr ? "rtl" : "ltr"} style={{ background: "#F8FAFC" }}>
+    <div className="min-h-screen" dir={isAr ? "rtl" : "ltr"} style={{ background: "linear-gradient(180deg, #FFFFFC 0%, #F5FAF6 35%, #E9F4EC 75%, #DCEEDF 100%)" }}>
       <header
         className="sticky top-0 z-40 border-b px-6 py-4"
         style={{

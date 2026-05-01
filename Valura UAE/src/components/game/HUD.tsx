@@ -10,6 +10,7 @@ import XPBar from "./XPBar";
 import CoinCounter from "./CoinCounter";
 import { useGameStore } from "@/lib/game/store";
 import SanadIcon from "./SanadIcon";
+import Wordmark from "@/components/brand/Wordmark";
 import { WORLD_COORDS } from "@/lib/game/world-coords";
 
 export interface HUDUser {
@@ -47,28 +48,32 @@ function StreakPill({
     <div className="relative">
       <button
         type="button"
-        className="flex items-center gap-2 rounded-full border border-[#E2E8F0] bg-white px-4 py-2 transition-shadow hover:shadow-md"
+        className="flex h-10 items-center gap-2 rounded-full border border-[#E2E8F0] bg-white px-4 transition-shadow hover:shadow-md"
         title={tip}
         aria-label={tip}
         onClick={() => setOpen((v) => !v)}
         onBlur={() => setOpen(false)}
       >
         {active ? (
-          <span
-            className="inline-flex size-5 items-center justify-center rounded-full"
+          <Flame
+            className="size-4"
             style={{
-              background: "linear-gradient(135deg, #F5C872, #D4A95A)",
+              color: "#F97316",
+              filter: "drop-shadow(0 0 4px rgba(249,115,22,0.4))",
             }}
+            strokeWidth={2}
             aria-hidden
-          >
-            <Flame className="size-3.5 text-[#FFFAF0]" strokeWidth={2.2} />
-          </span>
+          />
         ) : (
-          <Flame className="size-5 text-[#94A3B8]" strokeWidth={2} aria-hidden />
+          <Flame className="size-4 text-[#94A3B8]" strokeWidth={2} aria-hidden />
         )}
         <span
-          className="font-heading text-base font-semibold tabular-nums"
-          style={{ color: active ? "#00111B" : "#94A3B8" }}
+          style={{
+            fontFamily: "'Manrope', sans-serif",
+            fontWeight: 600,
+            fontSize: 14,
+            color: active ? "#00111B" : "#94A3B8",
+          }}
         >
           {streak}
         </span>
@@ -105,11 +110,9 @@ function StreakPill({
 function SettingsMenu({
   locale,
   initial,
-  onCloseParent,
 }: {
   locale: string;
   initial: string;
-  onCloseParent?: () => void;
 }) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -135,10 +138,14 @@ function SettingsMenu({
 
   return (
     <div className="relative" ref={ref}>
+      {/* Avatar button with double-ring */}
       <button
         type="button"
-        className="flex size-10 shrink-0 items-center justify-center rounded-full border border-[#E2E8F0] bg-[#FFFFFC] font-display text-sm font-bold transition-transform active:scale-[0.98]"
-        style={{ color: "#00111B" }}
+        className="flex size-11 shrink-0 items-center justify-center rounded-full font-display text-sm font-bold text-[#FFFFF8] transition-transform active:scale-[0.98]"
+        style={{
+          background: "#05A049",
+          boxShadow: "0 0 0 2px #FFFFFF, 0 0 0 4px rgba(180,227,200,0.3)",
+        }}
         aria-expanded={open}
         aria-haspopup="menu"
         onClick={() => setOpen((v) => !v)}
@@ -159,20 +166,14 @@ function SettingsMenu({
             <Link
               href={`/${locale}/profile`}
               className="block px-4 py-2.5 font-heading text-sm font-semibold text-[#00111B] hover:bg-[#F0F9F2]"
-              onClick={() => {
-                setOpen(false);
-                onCloseParent?.();
-              }}
+              onClick={() => setOpen(false)}
             >
               {isAr ? "الملف" : "Profile"}
             </Link>
             <Link
               href={`/${locale}/profile`}
               className="block px-4 py-2.5 font-heading text-sm font-semibold text-[#00111B] hover:bg-[#F0F9F2]"
-              onClick={() => {
-                setOpen(false);
-                onCloseParent?.();
-              }}
+              onClick={() => setOpen(false)}
             >
               {isAr ? "الإعدادات" : "Settings"}
             </Link>
@@ -205,7 +206,7 @@ function SettingsMenu({
 }
 
 /**
- * Sticky journey HUD — avatar + XP · VAL Coins · streak · Sanad · settings.
+ * Sticky journey HUD — avatar + level + XP · VAL Coins · streak · Sanad · settings.
  */
 export default function HUD({ user, locale = "en", onSanadOpen }: HUDProps) {
   const isHydrated = useGameStore((s) => s.isHydrated);
@@ -236,48 +237,69 @@ export default function HUD({ user, locale = "en", onSanadOpen }: HUDProps) {
 
   return (
     <header
-      className="sticky top-0 z-40 h-20 w-full border-b border-[#E2E8F0] backdrop-blur-sm"
+      className="sticky top-0 z-40 w-full border-b border-[#E2E8F0] backdrop-blur-sm"
       style={{ background: "rgba(255,255,252,0.94)" }}
       role="banner"
     >
-      <div className="mx-auto flex min-h-[5rem] w-full max-w-7xl flex-wrap items-center justify-between gap-x-6 gap-y-4 px-4 py-3 sm:px-8">
-        <div className="flex min-w-0 flex-1 items-center gap-4">
+      <div className="mx-auto flex h-[72px] w-full max-w-7xl items-center justify-between gap-x-4 gap-y-3 px-4 sm:px-8">
+
+        {/* Left: name + level + XP */}
+        <div className="flex min-w-0 flex-1 items-center gap-3">
+          {/* Avatar — double ring per spec */}
           <Link
             href={`/${locale}/profile`}
-            className="flex size-12 shrink-0 items-center justify-center rounded-full font-display text-[22px] font-bold text-[#FFFFF8] ring-2 ring-[#B4E3C8]/30 transition-transform active:scale-[0.98]"
-            style={{ background: "#05A049" }}
+            className="flex size-11 shrink-0 items-center justify-center rounded-full font-display text-[18px] font-bold text-[#FFFFF8] transition-transform active:scale-[0.98]"
+            style={{
+              background: "#05A049",
+              boxShadow: "0 0 0 2px #FFFFFF, 0 0 0 4px rgba(180,227,200,0.3)",
+            }}
             aria-label={locale === "ar" ? "الملف الشخصي" : "Profile"}
           >
             {initial}
           </Link>
-          <div className="min-w-0 flex-1">
+
+          {/* Name + level row */}
+          <div className="min-w-0 flex-1 space-y-0.5">
             <p
-              className="truncate font-heading text-base font-semibold"
-              style={{ color: "#00111B" }}
+              className="truncate"
+              style={{
+                fontFamily: "'Manrope', sans-serif",
+                fontWeight: 600,
+                fontSize: 14,
+                color: "#00111B",
+                lineHeight: 1.2,
+              }}
             >
               {name}
             </p>
-            <p className="font-body text-[13px]" style={{ color: "#475569" }}>
+            <p
+              style={{
+                fontFamily: "'Inter', sans-serif",
+                fontSize: 13,
+                fontWeight: 500,
+                color: "#475569",
+                lineHeight: 1.2,
+              }}
+            >
               {levelLine}
             </p>
             <XPBar totalXP={liveXp} currentLevel={user.currentLevel} />
           </div>
         </div>
 
-        <div className="flex shrink-0">
+        {/* Center: VAL Coins */}
+        <div className="hidden shrink-0 sm:flex">
           <CoinCounter amount={liveCoins} locale={locale} />
         </div>
 
-        <div className="flex shrink-0 items-center gap-3">
-          <StreakPill
-            streak={liveStreak}
-            freezes={freezes}
-            locale={locale}
-          />
+        {/* Right: streak · sanad · avatar/menu */}
+        <div className="flex shrink-0 items-center gap-2.5">
+          <StreakPill streak={liveStreak} freezes={freezes} locale={locale} />
 
+          {/* Sanad orb — 44px circle */}
           <button
             type="button"
-            className="flex size-11 shrink-0 items-center justify-center rounded-full border border-[#E2E8F0] bg-white transition-shadow hover:shadow-md active:scale-[0.98]"
+            className="relative flex size-11 shrink-0 items-center justify-center rounded-full border border-[#E2E8F0] bg-white transition-shadow hover:shadow-md active:scale-[0.98]"
             onClick={() => onSanadOpen?.()}
             aria-label={locale === "ar" ? "سند" : "Sanad"}
           >
@@ -286,10 +308,14 @@ export default function HUD({ user, locale = "en", onSanadOpen }: HUDProps) {
               size="md"
               facing={locale === "ar" ? "left" : "right"}
             />
+            {/* Mint pulse dot — "has a line to say" indicator */}
+            <span
+              className="absolute right-0.5 top-0.5 size-2.5 rounded-full border-2 border-white bg-[#05A049]"
+              aria-hidden
+            />
           </button>
 
           <SettingsMenu locale={locale} initial={initial} />
-
         </div>
       </div>
     </header>

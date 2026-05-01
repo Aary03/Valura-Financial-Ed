@@ -44,8 +44,8 @@ export default function CoinCounter({ amount, locale = "en" }: CoinCounterProps)
     <div
       className="flex items-center gap-2.5 rounded-full border px-5 py-2.5"
       style={{
-        background: "linear-gradient(180deg, #FFF8E7 0%, #FFEFC4 100%)",
-        borderColor: "rgba(212, 169, 90, 0.2)",
+        background: "linear-gradient(135deg, #FFF8E7 0%, #FCEFC4 50%, #F5DCA0 100%)",
+        borderColor: "rgba(212, 169, 90, 0.25)",
       }}
       aria-label={`VAL Coins: ${amount}`}
       aria-live="polite"
@@ -67,8 +67,13 @@ export default function CoinCounter({ amount, locale = "en" }: CoinCounterProps)
       </svg>
       <div className="flex flex-col items-start gap-0.5">
         <span
-          className="font-display text-2xl font-bold tabular-nums leading-none"
-          style={{ color: "#8B6914" }}
+          className="font-display tabular-nums leading-none"
+          style={{
+            fontFamily: "'Bricolage Grotesque', sans-serif",
+            fontWeight: 600,
+            fontSize: 26,
+            color: "#8B6914",
+          }}
         >
           {formatted}
         </span>

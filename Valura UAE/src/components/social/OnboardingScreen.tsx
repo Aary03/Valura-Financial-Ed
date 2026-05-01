@@ -153,7 +153,7 @@ export default function OnboardingScreen({ locale, userIdNonce }: OnboardingScre
             }}
             onClick={() => submit()}
           >
-            {pending ? "…" : isAr ? "ابدأ الرحلة" : "Continue to Valura"}
+            {pending ? "…" : isAr ? "ابدأ الرحلة" : "Start your journey →"}
           </motion.button>
         </section>
       </div>

@@ -45,12 +45,13 @@ export default function MapArea({
     const sync = () => {
       const m = Math.max(0, el.scrollWidth - el.clientWidth);
       setMaxScroll(m);
+      setScrollLeft(el.scrollLeft);
       if (el.scrollLeft > 20) setShowScrollHint(false);
     };
     sync();
     const ro = new ResizeObserver(sync);
     ro.observe(el);
-    el.addEventListener("scroll", sync);
+    el.addEventListener("scroll", sync, { passive: true });
     return () => {
       ro.disconnect();
       el.removeEventListener("scroll", sync);
@@ -197,13 +198,28 @@ export default function MapArea({
         className="relative hidden md:block min-h-[420px]"
         style={viewportHStyle}
       >
-        {showScrollHint && (
-          <div
-            aria-hidden
-            className="journey-scroll-hint pointer-events-none absolute end-8 top-[48%] z-30 -translate-y-1/2 text-[#05A049] opacity-60 motion-reduce:hidden motion-reduce:opacity-0"
+        {/* Scroll LEFT button — appears once scrolled right */}
+        {scrollLeft > 80 && (
+          <button
+            type="button"
+            aria-label={locale === "ar" ? "تمرير يسار" : "Scroll left"}
+            className="absolute start-8 top-1/2 z-30 -translate-y-1/2 flex size-11 items-center justify-center rounded-full border border-[#E2E8F0] bg-white shadow-md transition-all hover:shadow-lg active:scale-95"
+            onClick={() => scrollRef.current?.scrollBy({ left: -720, behavior: "smooth" })}
           >
-            <ChevronRight className="size-8 rtl:rotate-180" strokeWidth={2} />
-          </div>
+            <ChevronRight className="size-[18px] rotate-180 rtl:rotate-0" style={{ color: "#05A049" }} strokeWidth={2} />
+          </button>
+        )}
+
+        {/* Scroll RIGHT button — always visible, bounces subtly */}
+        {scrollLeft < maxScroll - 40 && (
+          <button
+            type="button"
+            aria-label={locale === "ar" ? "تمرير يمين" : "Scroll right"}
+            className="journey-scroll-hint absolute end-8 top-1/2 z-30 -translate-y-1/2 flex size-11 items-center justify-center rounded-full border border-[#E2E8F0] bg-white shadow-md transition-all hover:shadow-lg active:scale-95"
+            onClick={() => scrollRef.current?.scrollBy({ left: 720, behavior: "smooth" })}
+          >
+            <ChevronRight className="size-[18px] rtl:rotate-180" style={{ color: "#05A049" }} strokeWidth={2} />
+          </button>
         )}
 
         <div
@@ -300,12 +316,15 @@ export default function MapArea({
           aria-hidden
         >
           <span
-            className="rounded-full px-5 py-2 font-body text-[12px]"
+            className="rounded-full px-4 py-2"
             style={{
+              fontFamily: "'Inter', sans-serif",
+              fontWeight: 600,
+              fontSize: 13,
               background: "#FFFFFF",
               border: "1px solid #E2E8F0",
               boxShadow:
-                "0 2px 8px rgba(0,17,27,0.04), 0 8px 24px rgba(0,17,27,0.06)",
+                "0 2px 8px rgba(0,17,27,0.06), 0 8px 24px rgba(0,17,27,0.08)",
               color: "#475569",
             }}
           >

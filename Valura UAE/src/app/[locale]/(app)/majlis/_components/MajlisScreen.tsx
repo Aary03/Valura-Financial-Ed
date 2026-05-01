@@ -101,7 +101,7 @@ export default function MajlisScreen({ locale, initial }: Props) {
   /* empty */
   if (!dash) {
     return (
-      <main className="min-h-screen px-6 py-14 pb-28" dir={isAr ? "rtl" : "ltr"} style={{ background: "#F8FAFC" }}>
+      <main className="min-h-screen px-6 py-14 pb-28" dir={isAr ? "rtl" : "ltr"} style={{ background: "linear-gradient(180deg, #FFFFFC 0%, #F5FAF6 35%, #E9F4EC 75%, #DCEEDF 100%)" }}>
         <div className="mx-auto max-w-md space-y-10">
           <header className="space-y-2 text-center">
             <div
@@ -193,7 +193,7 @@ export default function MajlisScreen({ locale, initial }: Props) {
 
   /* dashboard */
   return (
-    <main className="min-h-screen pb-28" dir={isAr ? "rtl" : "ltr"} style={{ background: "#F8FAFC" }}>
+    <main className="min-h-screen pb-28" dir={isAr ? "rtl" : "ltr"} style={{ background: "linear-gradient(180deg, #FFFFFC 0%, #F5FAF6 35%, #E9F4EC 75%, #DCEEDF 100%)" }}>
       <header
         className="sticky top-0 z-40 border-b px-6 py-5"
         style={{
