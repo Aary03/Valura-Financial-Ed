@@ -172,7 +172,7 @@ export default function PledgeForm({ locale, valCoins: serverCoins }: PledgeForm
 
       <div
         className="flex flex-col min-h-screen"
-        style={{ background: "#F8FAFC" }}
+        style={{ background: "#080F08" }}
         dir={isAr ? "rtl" : "ltr"}
       >
         {/* ── Header ──────────────────────────────────────────────── */}

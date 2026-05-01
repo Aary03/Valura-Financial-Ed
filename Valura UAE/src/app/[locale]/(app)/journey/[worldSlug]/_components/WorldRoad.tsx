@@ -93,19 +93,19 @@ function StopCard({ node, index, total, locale, onTap }: StopCardProps) {
         className="relative z-10 flex w-full items-center gap-5 rounded-2xl border p-5 text-start transition-shadow"
         style={{
           background: isDone
-            ? "linear-gradient(135deg,rgba(5,160,73,0.05) 0%,rgba(5,160,73,0.02) 100%)"
+            ? "rgba(34,197,94,0.06)"
             : isAvailable
-              ? "#FFFFFF"
-              : "#F8FAFC",
+              ? "#0E1C0D"
+              : "rgba(255,255,255,0.02)",
           borderColor: isDone
-            ? "rgba(5,160,73,0.22)"
+            ? "rgba(34,197,94,0.25)"
             : isAvailable
-              ? "#E2E8F0"
-              : "#EFF2F6",
-          borderWidth: isAvailable ? 2 : 1,
+              ? "rgba(34,197,94,0.35)"
+              : "rgba(255,255,255,0.06)",
+          borderWidth: isAvailable ? 1.5 : 1,
           boxShadow: isAvailable
-            ? "0 4px 16px rgba(5,160,73,0.10), 0 2px 8px rgba(0,17,27,0.04)"
-            : "0 1px 4px rgba(0,17,27,0.04)",
+            ? "0 0 0 1px rgba(34,197,94,0.15), 0 4px 16px rgba(0,0,0,0.3)"
+            : "0 2px 8px rgba(0,0,0,0.3)",
           opacity: isLocked ? 0.55 : 1,
           cursor: isLocked ? "default" : "pointer",
         }}
@@ -171,7 +171,7 @@ function StopCard({ node, index, total, locale, onTap }: StopCardProps) {
           </div>
           <p
             className="font-heading text-[15px] font-semibold leading-snug"
-            style={{ color: isLocked ? "#94A3B8" : "#00111B" }}
+            style={{ color: isLocked ? "#4B5563" : "#F0FDF4" }}
           >
             {title}
           </p>

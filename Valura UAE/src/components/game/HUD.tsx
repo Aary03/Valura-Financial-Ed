@@ -28,15 +28,7 @@ interface HUDProps {
   onSanadOpen?: () => void;
 }
 
-function StreakPill({
-  streak,
-  freezes,
-  locale,
-}: {
-  streak: number;
-  freezes: number;
-  locale: string;
-}) {
+function StreakPill({ streak, freezes, locale }: { streak: number; freezes: number; locale: string }) {
   const isAr = locale === "ar";
   const active = streak > 0;
   const [open, setOpen] = useState(false);
@@ -48,31 +40,30 @@ function StreakPill({
     <div className="relative">
       <button
         type="button"
-        className="flex h-10 items-center gap-2 rounded-full border border-[#E2E8F0] bg-white px-4 transition-shadow hover:shadow-md"
+        className="flex h-9 items-center gap-2 rounded-lg px-3 transition-colors"
+        style={{
+          background: "rgba(255,255,255,0.04)",
+          border: "1px solid rgba(255,255,255,0.08)",
+        }}
         title={tip}
         aria-label={tip}
         onClick={() => setOpen((v) => !v)}
         onBlur={() => setOpen(false)}
+        onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.07)")}
+        onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.04)")}
       >
-        {active ? (
-          <Flame
-            className="size-4"
-            style={{
-              color: "#F97316",
-              filter: "drop-shadow(0 0 4px rgba(249,115,22,0.4))",
-            }}
-            strokeWidth={2}
-            aria-hidden
-          />
-        ) : (
-          <Flame className="size-4 text-[#94A3B8]" strokeWidth={2} aria-hidden />
-        )}
+        <Flame
+          className="size-4"
+          style={{ color: active ? "#F97316" : "#4B5563" }}
+          strokeWidth={2}
+          aria-hidden
+        />
         <span
           style={{
             fontFamily: "'Manrope', sans-serif",
             fontWeight: 600,
             fontSize: 14,
-            color: active ? "#00111B" : "#94A3B8",
+            color: active ? "#F0FDF4" : "#6B7280",
           }}
         >
           {streak}
@@ -82,22 +73,24 @@ function StreakPill({
       <AnimatePresence>
         {open && (
           <motion.div
-            className="absolute end-0 top-full z-50 mt-2 max-w-xs rounded-lg px-4 py-3 shadow-xl"
-            style={{ background: "#00111B" }}
+            className="absolute end-0 top-full z-50 mt-2 min-w-[180px] rounded-xl px-4 py-3 shadow-xl"
+            style={{
+              background: "#152213",
+              border: "1px solid rgba(255,255,255,0.1)",
+            }}
             initial={{ opacity: 0, y: -4 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -4 }}
             transition={{ duration: 0.15 }}
             role="tooltip"
           >
-            <p className="font-body text-xs" style={{ color: "#FFFFFC" }}>
+            <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: "#F0FDF4" }}>
               {tip}
             </p>
             <div className="mt-2 flex items-center gap-2">
-              <Snowflake className="size-3.5 text-[#B4E3C8]" aria-hidden />
-              <p className="font-body text-[11px]" style={{ color: "#94A3B8" }}>
-                {freezes}{" "}
-                {isAr ? "تجميد" : freezes === 1 ? "freeze" : "freezes"}
+              <Snowflake className="size-3.5" style={{ color: "#60A5FA" }} aria-hidden />
+              <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, color: "#6B7280" }}>
+                {freezes} {isAr ? "تجميد" : freezes === 1 ? "freeze" : "freezes"}
               </p>
             </div>
           </motion.div>
@@ -107,13 +100,7 @@ function StreakPill({
   );
 }
 
-function SettingsMenu({
-  locale,
-  initial,
-}: {
-  locale: string;
-  initial: string;
-}) {
+function SettingsMenu({ locale, initial }: { locale: string; initial: string }) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const isAr = locale === "ar";
@@ -138,13 +125,15 @@ function SettingsMenu({
 
   return (
     <div className="relative" ref={ref}>
-      {/* Avatar button with double-ring */}
       <button
         type="button"
-        className="flex size-11 shrink-0 items-center justify-center rounded-full font-display text-sm font-bold text-[#FFFFF8] transition-transform active:scale-[0.98]"
+        className="flex size-9 shrink-0 items-center justify-center rounded-lg text-sm font-bold transition-all active:scale-95"
         style={{
-          background: "#05A049",
-          boxShadow: "0 0 0 2px #FFFFFF, 0 0 0 4px rgba(180,227,200,0.3)",
+          background: "#22C55E",
+          color: "#060D06",
+          fontFamily: "'Manrope', sans-serif",
+          fontWeight: 700,
+          boxShadow: "0 0 0 1px rgba(34,197,94,0.3)",
         }}
         aria-expanded={open}
         aria-haspopup="menu"
@@ -156,45 +145,54 @@ function SettingsMenu({
       <AnimatePresence>
         {open && (
           <motion.div
-            className="absolute end-0 top-full z-[80] mt-2 min-w-[200px] overflow-hidden rounded-2xl border border-[#E2E8F0] bg-white py-2 shadow-xl"
+            className="absolute end-0 top-full z-[80] mt-2 min-w-[200px] overflow-hidden rounded-xl py-1 shadow-2xl"
+            style={{
+              background: "#152213",
+              border: "1px solid rgba(255,255,255,0.1)",
+            }}
             initial={{ opacity: 0, y: -6 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -6 }}
             transition={{ duration: 0.15 }}
             role="menu"
           >
-            <Link
-              href={`/${locale}/profile`}
-              className="block px-4 py-2.5 font-heading text-sm font-semibold text-[#00111B] hover:bg-[#F0F9F2]"
-              onClick={() => setOpen(false)}
-            >
-              {isAr ? "الملف" : "Profile"}
-            </Link>
-            <Link
-              href={`/${locale}/profile`}
-              className="block px-4 py-2.5 font-heading text-sm font-semibold text-[#00111B] hover:bg-[#F0F9F2]"
-              onClick={() => setOpen(false)}
-            >
-              {isAr ? "الإعدادات" : "Settings"}
-            </Link>
+            {[
+              { label: isAr ? "الملف الشخصي" : "Profile", href: `/${locale}/profile` },
+              { label: isAr ? "الإعدادات" : "Settings", href: `/${locale}/profile` },
+            ].map(({ label, href }) => (
+              <Link
+                key={label}
+                href={href}
+                className="block px-4 py-2.5 text-sm font-medium transition-colors"
+                style={{ fontFamily: "'Inter', sans-serif", color: "#D1FAE5" }}
+                onClick={() => setOpen(false)}
+                onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.05)")}
+                onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.background = "transparent")}
+              >
+                {label}
+              </Link>
+            ))}
             <button
               type="button"
-              className="flex w-full items-center gap-2 px-4 py-2.5 text-start font-heading text-sm font-semibold text-[#00111B] hover:bg-[#F0F9F2]"
+              className="flex w-full items-center gap-2 px-4 py-2.5 text-start text-sm font-medium transition-colors"
+              style={{ fontFamily: "'Inter', sans-serif", color: "#D1FAE5" }}
               role="menuitem"
               onClick={toggleLocale}
+              onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.05)")}
+              onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.background = "transparent")}
             >
               <span aria-hidden="true">{isAr ? "🇬🇧" : "🇦🇪"}</span>
               <span>{isAr ? "English" : "عربي"}</span>
             </button>
-            <div className="my-1 border-t border-[#F1F5F9]" role="separator" />
+            <div style={{ height: 1, background: "rgba(255,255,255,0.06)", margin: "4px 0" }} role="separator" />
             <button
               type="button"
-              className="w-full px-4 py-2.5 text-start font-heading text-sm font-semibold text-[#475569] hover:bg-[#F5F7FA]"
+              className="w-full px-4 py-2.5 text-start text-sm transition-colors"
+              style={{ fontFamily: "'Inter', sans-serif", color: "#6B7280" }}
               role="menuitem"
-              onClick={() => {
-                setOpen(false);
-                void signOut({ callbackUrl: `/${locale}` });
-              }}
+              onClick={() => { setOpen(false); void signOut({ callbackUrl: `/${locale}` }); }}
+              onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.05)")}
+              onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.background = "transparent")}
             >
               {isAr ? "تسجيل الخروج" : "Sign out"}
             </button>
@@ -205,9 +203,6 @@ function SettingsMenu({
   );
 }
 
-/**
- * Sticky journey HUD — avatar + level + XP · VAL Coins · streak · Sanad · settings.
- */
 export default function HUD({ user, locale = "en", onSanadOpen }: HUDProps) {
   const isHydrated = useGameStore((s) => s.isHydrated);
   const storeXp = useGameStore((s) => s.xp);
@@ -222,52 +217,50 @@ export default function HUD({ user, locale = "en", onSanadOpen }: HUDProps) {
   const name = user.displayName ?? (locale === "ar" ? "مستكشف" : "Explorer");
   const freezes = user.streakFreezeCount ?? 0;
 
-  const worldIdx = Math.min(
-    Math.max(user.currentLevel - 1, 0),
-    WORLD_COORDS.length - 1,
-  );
-  const worldLabel =
-    locale === "ar"
-      ? WORLD_COORDS[worldIdx]?.nameAr
-      : WORLD_COORDS[worldIdx]?.nameEn;
-  const levelLine =
-    locale === "ar"
-      ? `المستوى ${user.currentLevel} · ${worldLabel ?? ""}`
-      : `Level ${user.currentLevel} · ${worldLabel ?? ""}`;
+  const worldIdx = Math.min(Math.max(user.currentLevel - 1, 0), WORLD_COORDS.length - 1);
+  const worldLabel = locale === "ar"
+    ? WORLD_COORDS[worldIdx]?.nameAr
+    : WORLD_COORDS[worldIdx]?.nameEn;
+  const levelLine = locale === "ar"
+    ? `المستوى ${user.currentLevel} · ${worldLabel ?? ""}`
+    : `Level ${user.currentLevel} · ${worldLabel ?? ""}`;
 
   return (
     <header
-      className="sticky top-0 z-40 w-full border-b border-[#E2E8F0] backdrop-blur-sm"
-      style={{ background: "rgba(255,255,252,0.94)" }}
+      className="sticky top-0 z-40 w-full"
+      style={{
+        background: "rgba(8,15,8,0.96)",
+        backdropFilter: "blur(12px)",
+        borderBottom: "1px solid rgba(255,255,255,0.06)",
+      }}
       role="banner"
     >
-      <div className="mx-auto flex h-[72px] w-full max-w-7xl items-center justify-between gap-x-4 gap-y-3 px-4 sm:px-8">
+      <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between gap-x-4 px-4 sm:px-8">
 
-        {/* Left: name + level + XP */}
+        {/* Left: avatar + name + XP */}
         <div className="flex min-w-0 flex-1 items-center gap-3">
-          {/* Avatar — double ring per spec */}
           <Link
             href={`/${locale}/profile`}
-            className="flex size-11 shrink-0 items-center justify-center rounded-full font-display text-[18px] font-bold text-[#FFFFF8] transition-transform active:scale-[0.98]"
+            className="flex size-9 shrink-0 items-center justify-center rounded-lg text-[15px] font-bold transition-all active:scale-95"
             style={{
-              background: "#05A049",
-              boxShadow: "0 0 0 2px #FFFFFF, 0 0 0 4px rgba(180,227,200,0.3)",
+              background: "#22C55E",
+              color: "#060D06",
+              fontFamily: "'Manrope', sans-serif",
+              fontWeight: 700,
             }}
             aria-label={locale === "ar" ? "الملف الشخصي" : "Profile"}
           >
             {initial}
           </Link>
 
-          {/* Name + level row */}
           <div className="min-w-0 flex-1 space-y-0.5">
             <p
               className="truncate"
               style={{
                 fontFamily: "'Manrope', sans-serif",
                 fontWeight: 600,
-                fontSize: 14,
-                color: "#00111B",
-                lineHeight: 1.2,
+                fontSize: 13,
+                color: "#F0FDF4",
               }}
             >
               {name}
@@ -275,10 +268,8 @@ export default function HUD({ user, locale = "en", onSanadOpen }: HUDProps) {
             <p
               style={{
                 fontFamily: "'Inter', sans-serif",
-                fontSize: 13,
-                fontWeight: 500,
-                color: "#475569",
-                lineHeight: 1.2,
+                fontSize: 11,
+                color: "#6B7280",
               }}
             >
               {levelLine}
@@ -287,30 +278,31 @@ export default function HUD({ user, locale = "en", onSanadOpen }: HUDProps) {
           </div>
         </div>
 
-        {/* Center: VAL Coins */}
+        {/* Center: coins */}
         <div className="hidden shrink-0 sm:flex">
           <CoinCounter amount={liveCoins} locale={locale} />
         </div>
 
-        {/* Right: streak · sanad · avatar/menu */}
-        <div className="flex shrink-0 items-center gap-2.5">
+        {/* Right: streak · sanad · menu */}
+        <div className="flex shrink-0 items-center gap-2">
           <StreakPill streak={liveStreak} freezes={freezes} locale={locale} />
 
-          {/* Sanad orb — 44px circle */}
           <button
             type="button"
-            className="relative flex size-11 shrink-0 items-center justify-center rounded-full border border-[#E2E8F0] bg-white transition-shadow hover:shadow-md active:scale-[0.98]"
+            className="relative flex size-9 shrink-0 items-center justify-center rounded-lg transition-colors active:scale-95"
+            style={{
+              background: "rgba(255,255,255,0.04)",
+              border: "1px solid rgba(255,255,255,0.08)",
+            }}
             onClick={() => onSanadOpen?.()}
+            onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.07)")}
+            onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.04)")}
             aria-label={locale === "ar" ? "سند" : "Sanad"}
           >
-            <SanadIcon
-              mood="idle"
-              size="md"
-              facing={locale === "ar" ? "left" : "right"}
-            />
-            {/* Mint pulse dot — "has a line to say" indicator */}
+            <SanadIcon mood="idle" size="md" facing={locale === "ar" ? "left" : "right"} />
             <span
-              className="absolute right-0.5 top-0.5 size-2.5 rounded-full border-2 border-white bg-[#05A049]"
+              className="absolute right-0.5 top-0.5 size-2 rounded-full"
+              style={{ background: "#22C55E", boxShadow: "0 0 6px rgba(34,197,94,0.6)" }}
               aria-hidden
             />
           </button>

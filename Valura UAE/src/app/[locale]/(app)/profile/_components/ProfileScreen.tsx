@@ -186,7 +186,7 @@ export default function ProfileScreen({ locale, user, masteryData, badges }: Pro
   return (
     <div
       className="flex flex-col min-h-screen"
-      style={{ background: "linear-gradient(180deg, #FFFFFC 0%, #F5FAF6 35%, #E9F4EC 75%, #DCEEDF 100%)" }}
+      style={{ background: "#080F08" }}
       dir={isAr ? "rtl" : "ltr"}
     >
       {/* ── Header ────────────────────────────────────────────────── */}
@@ -339,7 +339,7 @@ export default function ProfileScreen({ locale, user, masteryData, badges }: Pro
             </>
           ) : (
             <div className="flex flex-col items-center gap-3 py-8 rounded-2xl"
-              style={{ background: "#F8FAFC", border: "1px dashed rgba(0,17,27,0.08)" }}>
+              style={{ background: "#080F08", border: "1px dashed rgba(0,17,27,0.08)" }}>
               <span className="text-3xl opacity-40">🎓</span>
               <p className="font-body text-sm text-center max-w-[220px]" style={{ color: "#94A3B8" }}>
                 {isAr
@@ -364,7 +364,7 @@ export default function ProfileScreen({ locale, user, masteryData, badges }: Pro
             </div>
           ) : (
             <div className="flex flex-col items-center gap-3 py-8 rounded-2xl"
-              style={{ background: "#F8FAFC", border: "1px dashed rgba(0,17,27,0.08)" }}>
+              style={{ background: "#080F08", border: "1px dashed rgba(0,17,27,0.08)" }}>
               <span className="text-3xl opacity-40">🏅</span>
               <p className="font-body text-sm text-center max-w-[220px]" style={{ color: "#94A3B8" }}>
                 {isAr ? "الشارات تُكتسب بإنجاز الأهداف والمراجعات" : "Badges are earned through goals and reviews"}

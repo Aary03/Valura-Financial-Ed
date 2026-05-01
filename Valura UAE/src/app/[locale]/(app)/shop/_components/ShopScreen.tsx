@@ -75,7 +75,7 @@ function ConfirmModal({ title, subtitle, cost, balance, ctaLabel, onConfirm, onC
         </div>
 
         {/* Cost breakdown */}
-        <div className="rounded-2xl p-4" style={{ background: "#F8FAFC", border: "1px solid rgba(0,17,27,0.07)" }}>
+        <div className="rounded-2xl p-4" style={{ background: "#080F08", border: "1px solid rgba(0,17,27,0.07)" }}>
           <div className="flex justify-between items-center mb-2">
             <span className="font-body text-sm" style={{ color: "#475569" }}>{isAr ? "السعر" : "Cost"}</span>
             <span className="flex items-center gap-1.5 font-heading text-sm font-bold" style={{ color: "#D97706" }}>
@@ -619,7 +619,7 @@ export default function ShopScreen({ locale, valCoins, ownedItems }: ShopScreenP
   return (
     <div
       className="flex flex-col min-h-screen"
-      style={{ background: "linear-gradient(180deg, #FFFFFC 0%, #F5FAF6 35%, #E9F4EC 75%, #DCEEDF 100%)" }}
+      style={{ background: "#080F08" }}
       dir={isAr ? "rtl" : "ltr"}
     >
       {/* ── Sticky header ───────────────────────────────────────────── */}

@@ -1,12 +1,7 @@
 import Link from "next/link";
-import { Zap } from "lucide-react";
 import Wordmark from "@/components/brand/Wordmark";
 import SignInForm from "./SignInForm";
 
-/**
- * Aldar × Valura Atlas sign-in page.
- * Two-column on desktop (≥1024px), single column on mobile.
- */
 export default function SignInPage({
   params: { locale },
 }: {
@@ -17,24 +12,17 @@ export default function SignInPage({
   return (
     <main
       className="relative min-h-screen overflow-hidden"
-      style={{
-        background:
-          "linear-gradient(180deg, #FFFFFC 0%, #F5FAF6 35%, #E9F4EC 75%, #DCEEDF 100%)",
-      }}
+      style={{ background: "#080F08" }}
       dir={isAr ? "rtl" : "ltr"}
     >
-      {/* Warm sun glow */}
+      {/* Background radial glow */}
       <div
-        className="pointer-events-none absolute"
+        className="pointer-events-none absolute inset-x-0 top-0"
         aria-hidden
         style={{
-          top: "5%",
-          right: "8%",
-          width: 500,
-          height: 500,
+          height: 400,
           background:
-            "radial-gradient(ellipse at center, rgba(245,220,160,0.22) 0%, transparent 70%)",
-          borderRadius: "50%",
+            "radial-gradient(ellipse at top center, rgba(34,197,94,0.1) 0%, transparent 70%)",
         }}
       />
 
@@ -43,149 +31,150 @@ export default function SignInPage({
         className="pointer-events-none absolute inset-0"
         aria-hidden
         style={{
-          backgroundImage: "radial-gradient(#00111B 0.75px, transparent 0.75px)",
-          backgroundSize: "8px 8px",
-          opacity: 0.025,
+          backgroundImage: "radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px)",
+          backgroundSize: "24px 24px",
         }}
       />
 
-      {/* Decorative road preview — bottom-right */}
+      {/* ── Nav strip ─────────────────────────────────────────────── */}
       <div
-        className="pointer-events-none absolute bottom-0 right-0 opacity-[0.28]"
-        aria-hidden
-        style={{ width: 340 }}
+        className="relative z-10 flex items-center justify-between px-8 py-5"
+        style={{ borderBottom: "1px solid rgba(255,255,255,0.05)" }}
       >
-        <svg viewBox="0 0 340 220" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path
-            d="M 0 180 Q 80 140 170 160 T 340 140"
-            stroke="#05A049"
-            strokeWidth="3"
-            strokeDasharray="10 5"
-            fill="none"
-          />
-          {[70, 170, 270].map((cx, i) => (
-            <g key={i}>
-              <circle cx={cx} cy={cx === 70 ? 161 : cx === 170 ? 157 : 152} r={12} fill="#05A049" opacity="0.15" />
-              <circle cx={cx} cy={cx === 70 ? 161 : cx === 170 ? 157 : 152} r={7} fill="#05A049" opacity="0.5" />
-            </g>
-          ))}
-        </svg>
+        <Link href={`/${locale}`} aria-label="Aldar × Valura Atlas — home">
+          <Wordmark variant="full" size="md" color="#F0FDF4" />
+        </Link>
+        <Link
+          href={`/${locale}`}
+          style={{
+            fontFamily: "'Inter', sans-serif",
+            fontSize: 13,
+            color: "#6B7280",
+          }}
+        >
+          ← {isAr ? "العودة للرئيسية" : "Back to home"}
+        </Link>
       </div>
 
       {/* ── Two-column layout ─────────────────────────────────────── */}
-      <div className="relative z-10 flex min-h-screen flex-col lg:flex-row">
+      <div className="relative z-10 flex min-h-[calc(100vh-73px)] flex-col lg:flex-row">
 
-        {/* LEFT COLUMN — hero copy (hidden on mobile, shown on desktop) */}
-        <div className="hidden lg:flex lg:w-[58%] flex-col justify-center px-20 py-20">
-          <Link href={`/${locale}`} aria-label="Aldar × Valura Atlas — home">
-            <Wordmark variant="full" size="lg" />
-          </Link>
+        {/* LEFT — hero copy (desktop only) */}
+        <div className="hidden lg:flex lg:w-[55%] flex-col justify-center px-16 py-16">
+          <div className="mb-6 flex flex-wrap gap-2">
+            <span className="chip chip-green">
+              {isAr ? "ثنائي اللغة" : "Bilingual EN / AR"}
+            </span>
+            <span className="chip">
+              {isAr ? "متوافق مع الشريعة" : "Sharia-aware"}
+            </span>
+            <span className="chip">
+              {isAr ? "خصوصية أولاً" : "Privacy-first"}
+            </span>
+          </div>
 
           <h1
-            className="mt-12 leading-tight"
             style={{
               fontFamily: "'Bricolage Grotesque', sans-serif",
-              fontWeight: 600,
-              fontSize: "clamp(38px, 4vw, 56px)",
-              color: "#00111B",
+              fontWeight: 700,
+              fontSize: "clamp(36px, 4vw, 52px)",
+              lineHeight: 1.05,
               letterSpacing: "-0.03em",
-              maxWidth: 520,
+              color: "#FFFFFF",
+              maxWidth: 500,
             }}
           >
-            {isAr
-              ? "إتقان المال. مستوى تلو الآخر."
-              : "Money, mastered. One level at a time."}
+            {isAr ? (
+              <>إتقان المال. <span style={{ color: "#22C55E" }}>مستوى تلو الآخر.</span></>
+            ) : (
+              <>Money, mastered. <span style={{ color: "#22C55E" }}>One level at a time.</span></>
+            )}
           </h1>
 
           <p
             className="mt-6"
             style={{
               fontFamily: "'Inter', sans-serif",
-              fontSize: 18,
-              color: "#475569",
+              fontSize: 17,
+              color: "#6B7280",
               lineHeight: 1.65,
-              maxWidth: 460,
+              maxWidth: 440,
             }}
           >
             {isAr
-              ? "رحلة للصحة المالية للجميع في الإمارات — ثنائية اللغة، متوافقة مع الشريعة، ولكِ تحتفظين بها."
+              ? "رحلة للصحة المالية للجميع في الإمارات — ثنائية اللغة، متوافقة مع الشريعة، ولكَ تحتفظ بها."
               : "A financial wellness journey for everyone in the UAE — bilingual, Sharia-aware, and yours to keep."}
           </p>
 
-          {/* Trust chips */}
-          <div className="mt-8 flex flex-wrap gap-2">
+          {/* Stats */}
+          <div className="mt-10 grid grid-cols-2 gap-3 max-w-sm">
             {[
-              isAr ? "ثنائي اللغة EN / AR" : "Bilingual EN / AR",
-              isAr ? "متوافق مع الشريعة" : "Sharia-aware",
-              isAr ? "خصوصية أولاً" : "Privacy-first",
-            ].map((chip) => (
-              <span
-                key={chip}
-                className="rounded-full border px-3 py-1.5"
+              { v: "15", l: isAr ? "عالماً مالياً" : "Financial worlds" },
+              { v: "EN/AR", l: isAr ? "ثنائي اللغة" : "Fully bilingual" },
+              { v: "100%", l: isAr ? "متوافق مع الشريعة" : "Sharia-aware" },
+              { v: "Free", l: isAr ? "مجاني دائماً" : "Always free" },
+            ].map((s) => (
+              <div
+                key={s.l}
+                className="rounded-lg px-4 py-3"
                 style={{
-                  fontFamily: "'Inter', sans-serif",
-                  fontSize: 13,
-                  color: "#475569",
-                  background: "#FFFFFF",
-                  borderColor: "#E2E8F0",
+                  background: "rgba(255,255,255,0.02)",
+                  border: "1px solid rgba(255,255,255,0.06)",
                 }}
               >
-                {chip}
-              </span>
+                <p style={{ fontFamily: "'Manrope', sans-serif", fontWeight: 700, fontSize: 20, color: "#22C55E" }}>
+                  {s.v}
+                </p>
+                <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, color: "#6B7280", marginTop: 2 }}>
+                  {s.l}
+                </p>
+              </div>
             ))}
           </div>
 
           <p
-            className="mt-auto pt-16"
-            style={{
-              fontFamily: "'Inter', sans-serif",
-              fontSize: 12,
-              color: "#94A3B8",
-            }}
+            className="mt-auto pt-12"
+            style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, color: "#374151" }}
           >
-            {isAr
-              ? "منتج Valura، بالشراكة مع Aldar."
-              : "A Valura product, in partnership with Aldar."}
+            {isAr ? "منتج Valura، بالشراكة مع Aldar." : "A Valura product, in partnership with Aldar."}
           </p>
         </div>
 
-        {/* RIGHT COLUMN — login card */}
-        <div className="flex flex-1 items-center justify-center px-6 py-16 lg:w-[42%] lg:px-20 lg:py-20">
+        {/* RIGHT — login card */}
+        <div className="flex flex-1 items-center justify-center px-6 py-16 lg:w-[45%] lg:px-16">
           <div className="w-full max-w-md">
 
-            {/* Mobile wordmark only */}
-            <div className="mb-10 flex flex-col items-center gap-2 lg:hidden">
-              <Link href={`/${locale}`} aria-label="Aldar × Valura Atlas — home">
-                <Wordmark variant="full" size="md" />
-              </Link>
+            {/* Mobile wordmark */}
+            <div className="mb-8 flex flex-col items-center gap-2 lg:hidden">
+              <Wordmark variant="full" size="md" color="#F0FDF4" />
             </div>
 
             {/* Card */}
             <div
-              className="w-full rounded-3xl p-10"
+              className="w-full rounded-2xl p-8"
               style={{
-                background: "#FFFFFF",
-                border: "1px solid #E2E8F0",
-                boxShadow: "0 24px 48px rgba(0,17,27,0.08)",
+                background: "#0E1C0D",
+                border: "1px solid rgba(255,255,255,0.08)",
+                boxShadow: "0 8px 32px rgba(0,0,0,0.5), 0 32px 64px rgba(0,0,0,0.3)",
               }}
             >
               <h2
                 className="mb-1"
                 style={{
                   fontFamily: "'Manrope', sans-serif",
-                  fontWeight: 600,
+                  fontWeight: 700,
                   fontSize: 22,
-                  color: "#00111B",
+                  color: "#FFFFFF",
                 }}
               >
-                {isAr ? "أهلاً بك" : "Welcome"}
+                {isAr ? "أهلاً بك" : "Welcome back"}
               </h2>
               <p
                 className="mb-7"
                 style={{
                   fontFamily: "'Inter', sans-serif",
                   fontSize: 14,
-                  color: "#475569",
+                  color: "#6B7280",
                 }}
               >
                 {isAr
@@ -196,19 +185,19 @@ export default function SignInPage({
               <SignInForm locale={locale} />
             </div>
 
-            {/* Compliance text */}
+            {/* Compliance */}
             <p
               className="mt-6 text-center leading-relaxed"
               style={{
                 fontFamily: "'Inter', sans-serif",
                 fontSize: 12,
-                color: "#94A3B8",
+                color: "#374151",
                 maxWidth: 380,
                 margin: "24px auto 0",
               }}
             >
               {isAr
-                ? "تعليمي فقط، ليس نصيحة مالية. عملات VAL افتراضية — للتجميل والخير فقط، غير قابلة للاسترداد."
+                ? "تعليمي فقط، ليس نصيحة مالية. عملات VAL افتراضية — للتجميل والخير فقط."
                 : "Educational only, not financial advice. VAL Coins are virtual — for cosmetics and charity only, never redeemable."}
             </p>
           </div>

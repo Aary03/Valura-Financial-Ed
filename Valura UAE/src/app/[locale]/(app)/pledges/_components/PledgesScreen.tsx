@@ -164,7 +164,7 @@ function PledgeCard({ pledge, locale, onCancel }: {
         {pledge.status === "LOST" && (
           <div
             className="flex items-center gap-2 rounded-xl px-3 py-2 mb-3"
-            style={{ background: "#F8FAFC", border: "1px solid rgba(0,17,27,0.07)" }}
+            style={{ background: "#080F08", border: "1px solid rgba(0,17,27,0.07)" }}
           >
             <span className="text-base">{charity?.icon ?? "🤝"}</span>
             <p className="font-body text-xs" style={{ color: "#475569" }}>
@@ -259,7 +259,7 @@ export default function PledgesScreen({ locale, pledges }: PledgesScreenProps) {
   return (
     <div
       className="flex flex-col min-h-screen"
-      style={{ background: "#F8FAFC" }}
+      style={{ background: "#080F08" }}
       dir={isAr ? "rtl" : "ltr"}
     >
       {/* ── Header ────────────────────────────────────────────────── */}

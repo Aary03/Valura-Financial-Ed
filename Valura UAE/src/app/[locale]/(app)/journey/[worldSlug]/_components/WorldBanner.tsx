@@ -38,12 +38,13 @@ export default function WorldBanner({ bannerKey, className }: WorldBannerProps) 
   return (
     <div
       className={className}
-      style={{
-        background: `linear-gradient(145deg, ${theme.from} 0%, ${theme.to} 100%)`,
-        overflow: "hidden",
-        borderRadius: "0 0 1.5rem 1.5rem",
-        position: "relative",
-      }}
+        style={{
+          background: `linear-gradient(145deg, #0A1A0A 0%, ${theme.from}22 50%, #0A1A0A 100%)`,
+          overflow: "hidden",
+          borderRadius: "0 0 1.5rem 1.5rem",
+          position: "relative",
+          borderBottom: "1px solid rgba(255,255,255,0.06)",
+        }}
     >
       {/* Dot-grid texture */}
       <div

@@ -94,7 +94,7 @@ export default function FriendsScreen({ locale, initial }: FriendsScreenProps) {
   const showPercentBand = data.friends.length > 0 && data.topPercentBand != null;
 
   return (
-    <div className="min-h-screen" dir={isAr ? "rtl" : "ltr"} style={{ background: "linear-gradient(180deg, #FFFFFC 0%, #F5FAF6 35%, #E9F4EC 75%, #DCEEDF 100%)" }}>
+    <div className="min-h-screen" dir={isAr ? "rtl" : "ltr"} style={{ background: "#080F08" }}>
       <header
         className="sticky top-0 z-40 border-b px-6 py-4"
         style={{
@@ -251,7 +251,7 @@ export default function FriendsScreen({ locale, initial }: FriendsScreenProps) {
         <div className="mx-auto max-w-3xl space-y-6">
           <div className="rounded-3xl px-6 py-4 flex justify-between gap-4 flex-wrap" style={{
             border:       "1px solid rgba(0,17,27,0.06)",
-            background: "#F8FAFC",
+            background: "#080F08",
           }}
           aria-live="polite"
           >

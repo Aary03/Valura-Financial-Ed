@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { BookOpen, Globe, ShieldCheck, ChevronRight } from "lucide-react";
+import { BookOpen, Globe, ShieldCheck, ArrowRight, Zap, TrendingUp, Users } from "lucide-react";
 import Wordmark from "@/components/brand/Wordmark";
 
 export default function HomePage({
@@ -12,210 +12,368 @@ export default function HomePage({
   return (
     <div
       className="min-h-screen"
-      style={{
-        background:
-          "linear-gradient(180deg, #FFFFFC 0%, #F5FAF6 35%, #E9F4EC 75%, #DCEEDF 100%)",
-      }}
+      style={{ background: "#080F08" }}
       dir={isAr ? "rtl" : "ltr"}
     >
       {/* ── Top nav ───────────────────────────────────────────────── */}
       <nav
-        className="sticky top-0 z-50 flex items-center justify-between py-5 px-6 sm:px-12"
+        className="sticky top-0 z-50 flex items-center justify-between px-6 py-4 sm:px-12"
         style={{
-          background: "rgba(255,255,252,0.88)",
+          background: "rgba(8,15,8,0.92)",
           backdropFilter: "blur(12px)",
-          borderBottom: "1px solid #E2E8F0",
+          borderBottom: "1px solid rgba(255,255,255,0.06)",
         }}
       >
-        <Wordmark variant="full" size="md" />
-        <Link
-          href={`/${locale}/sign-in`}
-          className="font-body text-sm font-medium transition-colors hover:text-[#00111B]"
-          style={{ color: "#475569" }}
-        >
-          {isAr ? "تسجيل الدخول" : "Sign in"}
-        </Link>
+        <Wordmark variant="full" size="md" color="#F0FDF4" />
+        <div className="flex items-center gap-4">
+          <Link
+            href={`/${locale}/sign-in`}
+            className="transition-colors"
+            style={{
+              fontFamily: "'Inter', sans-serif",
+              fontSize: 14,
+              color: "#9CA3AF",
+            }}
+            onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "#F0FDF4")}
+            onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "#9CA3AF")}
+          >
+            {isAr ? "تسجيل الدخول" : "Sign in"}
+          </Link>
+          <Link
+            href={`/${locale}/sign-in`}
+            className="btn-primary"
+            style={{ height: 36, padding: "0 16px", fontSize: 13 }}
+          >
+            {isAr ? "ابدأ مجاناً" : "Start for free"} <ArrowRight size={14} />
+          </Link>
+        </div>
       </nav>
 
       {/* ── Hero section ──────────────────────────────────────────── */}
-      <section className="relative flex min-h-[calc(100vh-73px)] flex-col items-center justify-center overflow-hidden px-6 py-24 text-center">
-        {/* Warm sun glow */}
+      <section className="relative overflow-hidden px-6 pb-24 pt-20 sm:px-12">
+        {/* Background glow */}
         <div
-          className="pointer-events-none absolute"
+          className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2"
           aria-hidden
           style={{
-            top: "5%",
-            right: "10%",
-            width: 500,
-            height: 500,
+            width: 800,
+            height: 400,
             background:
-              "radial-gradient(ellipse at center, rgba(245,220,160,0.22) 0%, transparent 70%)",
-            borderRadius: "50%",
+              "radial-gradient(ellipse at top, rgba(34,197,94,0.12) 0%, transparent 70%)",
           }}
         />
 
-        <div className="relative z-10 mx-auto max-w-4xl">
-          {/* Eyebrow */}
-          <div className="mb-8 flex items-center justify-center gap-3">
-            <div className="h-px w-12 bg-[#05A049] opacity-40" />
-            <span
-              className="font-body text-[11px] font-semibold uppercase tracking-widest"
-              style={{ color: "#05A049" }}
-            >
-              {isAr ? "رحلة الصحة المالية" : "Financial Wellness Journey"}
+        <div className="relative mx-auto max-w-5xl">
+          {/* Tag chips */}
+          <div className="mb-8 flex flex-wrap items-center gap-2">
+            <span className="chip chip-green">
+              {isAr ? "رحلة مالية" : "Financial Journey"}
             </span>
-            <div className="h-px w-12 bg-[#05A049] opacity-40" />
+            <span className="chip">
+              {isAr ? "الإمارات · UAE" : "UAE · المارات"}
+            </span>
+            <span className="chip">
+              {isAr ? "ثنائي اللغة" : "Bilingual EN / AR"}
+            </span>
+            <span className="chip chip-green">
+              {isAr ? "مجاني" : "Free to use"}
+            </span>
           </div>
 
           {/* Headline */}
           <h1
-            className="mb-6 font-display leading-[1.05]"
             style={{
               fontFamily: "'Bricolage Grotesque', sans-serif",
-              fontWeight: 600,
-              fontSize: "clamp(48px, 8vw, 80px)",
-              color: "#00111B",
+              fontWeight: 700,
+              fontSize: "clamp(40px, 6vw, 72px)",
+              lineHeight: 1.05,
               letterSpacing: "-0.03em",
+              color: "#FFFFFF",
+              maxWidth: 780,
             }}
           >
             {isAr ? (
               <>
-                إتقان المال.
-                <br />
-                مستوى تلو الآخر.
+                أشمل رحلة للصحة المالية{" "}
+                <span style={{ color: "#22C55E" }}>لمقيمي الإمارات</span>
               </>
             ) : (
               <>
-                Money, mastered.
+                UAE&apos;s sharpest financial
                 <br />
-                One level at a time.
+                wellness journey{" "}
+                <span style={{ color: "#22C55E" }}>for everyone</span>
               </>
             )}
           </h1>
 
           {/* Sub-headline */}
           <p
-            className="mx-auto mb-10 max-w-2xl leading-relaxed"
+            className="mt-6"
             style={{
               fontFamily: "'Inter', sans-serif",
-              fontSize: 19,
-              color: "#475569",
+              fontSize: 18,
+              color: "#9CA3AF",
+              lineHeight: 1.65,
+              maxWidth: 580,
             }}
           >
             {isAr
-              ? "منصة للصحة المالية باللغتين العربية والإنجليزية، متوافقة مع الشريعة الإسلامية، مبنية لكل من في الإمارات."
-              : "A bilingual, Sharia-aware financial wellness platform built for everyone in the UAE — from your first salary to your end-of-service planning."}
+              ? "خمسة عشر عالماً مالياً. ثنائي اللغة. متوافق مع الشريعة. مبني للإماراتيين والمغتربين على حد سواء."
+              : "Fifteen financial worlds covering budgeting, investment, insurance, and end-of-service planning — built for Emiratis and expats alike."}
           </p>
 
-          {/* CTA buttons */}
-          <div className="mb-6 flex flex-wrap items-center justify-center gap-4">
-            <Link
-              href={`/${locale}/sign-in`}
-              className="flex h-12 items-center gap-2 rounded-xl px-8 transition-all active:scale-[0.98]"
-              style={{
-                background: "#05A049",
-                color: "#FFFFFF",
-                fontFamily: "'Manrope', sans-serif",
-                fontWeight: 600,
-                fontSize: 15,
-                boxShadow: "0 4px 12px rgba(5,160,73,0.25)",
-              }}
-              onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.background = "#03803A")}
-              onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.background = "#05A049")}
-            >
-              {isAr ? "ابدأ رحلتك ←" : "Start your journey →"}
+          {/* CTA row */}
+          <div className="mt-10 flex flex-wrap items-center gap-3">
+            <Link href={`/${locale}/sign-in`} className="btn-primary">
+              {isAr ? "ابدأ رحلتك" : "Start your journey"} <ArrowRight size={16} />
             </Link>
-            <Link
-              href={`/${locale}/pitch`}
-              className="flex h-12 items-center gap-2 rounded-xl border px-8 transition-all active:scale-[0.98]"
-              style={{
-                background: "#FFFFFF",
-                border: "1.5px solid #E2E8F0",
-                color: "#00111B",
-                fontFamily: "'Manrope', sans-serif",
-                fontWeight: 600,
-                fontSize: 15,
-              }}
-            >
-              {isAr ? "للبنوك: عرض الفرصة" : "For banks: see the pitch"}
+            <Link href={`/${locale}/sign-in`} className="btn-secondary">
+              {isAr ? "شاهد كيف يعمل" : "See how it works"}
             </Link>
           </div>
 
-          {/* Caption */}
+          {/* Stat chips row */}
+          <div className="mt-10 flex flex-wrap gap-3">
+            {STATS.map((s) => (
+              <div
+                key={s.labelEn}
+                className="flex items-center gap-3 rounded-lg px-4 py-2.5"
+                style={{
+                  background: "rgba(255,255,255,0.03)",
+                  border: "1px solid rgba(255,255,255,0.07)",
+                }}
+              >
+                <span
+                  style={{
+                    fontFamily: "'Manrope', sans-serif",
+                    fontWeight: 700,
+                    fontSize: 18,
+                    color: "#22C55E",
+                  }}
+                >
+                  {s.value}
+                </span>
+                <span
+                  style={{
+                    fontFamily: "'Inter', sans-serif",
+                    fontSize: 13,
+                    color: "#6B7280",
+                  }}
+                >
+                  {isAr ? s.labelAr : s.labelEn}
+                </span>
+              </div>
+            ))}
+          </div>
+
+          {/* Info bar */}
+          <div className="info-bar mt-8 max-w-xl">
+            <Zap size={14} style={{ color: "#F59E0B", flexShrink: 0 }} />
+            <span>
+              {isAr
+                ? "نسخة تجريبية — أي بريد إلكتروني يسجّل دخولك فوراً. لا بطاقة ائتمان."
+                : "Demo build — any email signs you in instantly. No credit card required."}
+            </span>
+          </div>
+        </div>
+      </section>
+
+      {/* ── "The Journey" section ─────────────────────────────────── */}
+      <section className="px-6 py-20 sm:px-12">
+        <div className="mx-auto max-w-5xl">
           <p
+            className="mb-4 chip chip-green"
+            style={{ display: "inline-flex" }}
+          >
+            {isAr ? "الرحلة" : "The Journey"}
+          </p>
+          <h2
+            className="mb-3"
             style={{
-              fontFamily: "'Inter', sans-serif",
-              fontSize: 13,
-              color: "#94A3B8",
+              fontFamily: "'Bricolage Grotesque', sans-serif",
+              fontWeight: 700,
+              fontSize: "clamp(28px, 4vw, 44px)",
+              letterSpacing: "-0.02em",
+              color: "#FFFFFF",
             }}
           >
             {isAr
-              ? "شراكة Aldar × Valura · مجاني لجميع العملاء"
-              : "An Aldar × Valura partnership · Free for all customers"}
+              ? "خمسة عشر عالماً. كل زاوية مغطاة."
+              : "Fifteen worlds. Every angle covered."}
+          </h2>
+          <p
+            style={{
+              fontFamily: "'Inter', sans-serif",
+              fontSize: 16,
+              color: "#6B7280",
+              maxWidth: 480,
+              lineHeight: 1.6,
+            }}
+          >
+            {isAr
+              ? "كل عالم مبني على قواعد الإمارات الحقيقية — لا ذكاء اصطناعي عاماً، لا تقريب."
+              : "Each world is built on real UAE financial rules — no generic AI, no approximations."}
           </p>
-        </div>
 
-        {/* Decorative journey map preview */}
-        <div
-          className="pointer-events-none absolute bottom-0 left-1/2 -translate-x-1/2 opacity-[0.07]"
-          aria-hidden
-          style={{ width: "min(900px, 90vw)" }}
-        >
-          <svg viewBox="0 0 900 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path
-              d="M 0 80 Q 150 40 300 80 T 600 60 T 900 70"
-              stroke="#05A049"
-              strokeWidth="3"
-              strokeDasharray="12 6"
-              fill="none"
-            />
-            {[150, 450, 750].map((cx) => (
-              <g key={cx}>
-                <circle cx={cx} cy={cx === 150 ? 60 : cx === 450 ? 68 : 58} r={14} fill="#05A049" />
-                <circle cx={cx} cy={cx === 150 ? 60 : cx === 450 ? 68 : 58} r={10} fill="#DCEEDF" />
-              </g>
+          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {WORLDS.map((w, i) => (
+              <div
+                key={w.enTitle}
+                className="group rounded-xl p-5 transition-all"
+                style={{
+                  background: "rgba(255,255,255,0.02)",
+                  border: "1px solid rgba(255,255,255,0.06)",
+                }}
+                onMouseEnter={(e) => {
+                  (e.currentTarget as HTMLElement).style.background = "rgba(34,197,94,0.04)";
+                  (e.currentTarget as HTMLElement).style.borderColor = "rgba(34,197,94,0.18)";
+                }}
+                onMouseLeave={(e) => {
+                  (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.02)";
+                  (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.06)";
+                }}
+              >
+                <div className="mb-3 flex items-center justify-between">
+                  <span
+                    style={{
+                      fontFamily: "'Inter', sans-serif",
+                      fontSize: 11,
+                      fontWeight: 600,
+                      color: "#22C55E",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.06em",
+                    }}
+                  >
+                    World {i + 1}
+                  </span>
+                  <span
+                    style={{
+                      fontFamily: "'Inter', sans-serif",
+                      fontSize: 11,
+                      color: "#4B5563",
+                    }}
+                  >
+                    5 stops
+                  </span>
+                </div>
+                <p
+                  style={{
+                    fontFamily: "'Manrope', sans-serif",
+                    fontWeight: 600,
+                    fontSize: 15,
+                    color: "#F0FDF4",
+                    lineHeight: 1.3,
+                  }}
+                >
+                  {isAr ? w.arTitle : w.enTitle}
+                </p>
+              </div>
             ))}
-          </svg>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Why it works ──────────────────────────────────────────── */}
+      <section className="px-6 py-20 sm:px-12">
+        <div className="mx-auto max-w-5xl">
+          <p className="chip chip-green mb-4" style={{ display: "inline-flex" }}>
+            {isAr ? "لماذا يعمل" : "Why it works"}
+          </p>
+          <h2
+            className="mb-12"
+            style={{
+              fontFamily: "'Bricolage Grotesque', sans-serif",
+              fontWeight: 700,
+              fontSize: "clamp(28px, 4vw, 40px)",
+              letterSpacing: "-0.02em",
+              color: "#FFFFFF",
+            }}
+          >
+            {isAr ? "مبني للإمارات. ليس مترجماً لها." : "Built for the UAE. Not translated."}
+          </h2>
+
+          <div className="grid gap-5 sm:grid-cols-3">
+            {WHY_ITEMS.map((item) => (
+              <div
+                key={item.enTitle}
+                className="rounded-xl p-6"
+                style={{
+                  background: "rgba(255,255,255,0.02)",
+                  border: "1px solid rgba(255,255,255,0.06)",
+                }}
+              >
+                <div
+                  className="mb-4 flex size-12 items-center justify-center rounded-xl"
+                  style={{ background: "rgba(34,197,94,0.1)" }}
+                >
+                  <item.Icon size={22} color="#22C55E" strokeWidth={1.75} />
+                </div>
+                <p
+                  className="mb-2"
+                  style={{
+                    fontFamily: "'Manrope', sans-serif",
+                    fontWeight: 600,
+                    fontSize: 16,
+                    color: "#FFFFFF",
+                  }}
+                >
+                  {isAr ? item.arTitle : item.enTitle}
+                </p>
+                <p
+                  style={{
+                    fontFamily: "'Inter', sans-serif",
+                    fontSize: 14,
+                    color: "#6B7280",
+                    lineHeight: 1.6,
+                  }}
+                >
+                  {isAr ? item.arBody : item.enBody}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* ── Cast strip ────────────────────────────────────────────── */}
-      <section className="py-20 px-6 sm:px-12">
+      <section className="px-6 py-20 sm:px-12">
         <div className="mx-auto max-w-5xl">
+          <p className="chip mb-4" style={{ display: "inline-flex" }}>
+            {isAr ? "المجتمع" : "The Community"}
+          </p>
           <h2
-            className="mb-12 text-center"
+            className="mb-12"
             style={{
               fontFamily: "'Bricolage Grotesque', sans-serif",
-              fontWeight: 600,
-              fontSize: 36,
-              color: "#00111B",
+              fontWeight: 700,
+              fontSize: "clamp(28px, 4vw, 40px)",
               letterSpacing: "-0.02em",
+              color: "#FFFFFF",
             }}
           >
             {isAr ? "مبني حول أشخاص حقيقيين في الإمارات" : "Built around real people in the UAE"}
           </h2>
 
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {CAST.map((person) => (
               <div
                 key={person.name}
-                className="rounded-3xl p-8"
+                className="rounded-xl p-6"
                 style={{
-                  background: "#FFFFFF",
-                  border: "1px solid #E2E8F0",
-                  boxShadow:
-                    "0 1px 2px rgba(0,17,27,0.04), 0 4px 12px rgba(0,17,27,0.04), 0 12px 32px rgba(0,17,27,0.06)",
+                  background: "rgba(255,255,255,0.02)",
+                  border: "1px solid rgba(255,255,255,0.06)",
                 }}
               >
                 <div
-                  className="mb-4 flex size-16 items-center justify-center rounded-full"
-                  style={{ background: person.bg }}
+                  className="mb-4 flex size-14 items-center justify-center rounded-full"
+                  style={{ background: person.bg, border: "1px solid rgba(255,255,255,0.08)" }}
                 >
                   <span
                     style={{
                       fontFamily: "'Manrope', sans-serif",
                       fontWeight: 700,
-                      fontSize: 24,
+                      fontSize: 20,
                       color: person.color,
                     }}
                   >
@@ -227,18 +385,18 @@ export default function HomePage({
                   style={{
                     fontFamily: "'Manrope', sans-serif",
                     fontWeight: 600,
-                    fontSize: 18,
-                    color: "#00111B",
+                    fontSize: 15,
+                    color: "#FFFFFF",
                   }}
                 >
                   {person.name}
                 </p>
                 <p
-                  className="mb-4"
+                  className="mb-3"
                   style={{
                     fontFamily: "'Inter', sans-serif",
-                    fontSize: 13,
-                    color: "#475569",
+                    fontSize: 12,
+                    color: "#6B7280",
                   }}
                 >
                   {isAr ? person.roleAr : person.role}
@@ -247,8 +405,8 @@ export default function HomePage({
                   className="italic leading-snug"
                   style={{
                     fontFamily: "'Inter', sans-serif",
-                    fontSize: 14,
-                    color: "#1E293B",
+                    fontSize: 13,
+                    color: "#9CA3AF",
                   }}
                 >
                   &ldquo;{isAr ? person.quoteAr : person.quote}&rdquo;
@@ -259,86 +417,25 @@ export default function HomePage({
         </div>
       </section>
 
-      {/* ── Why it works ──────────────────────────────────────────── */}
-      <section className="py-20 px-6 sm:px-12">
-        <div className="mx-auto max-w-4xl">
-          <h2
-            className="mb-12 text-center"
-            style={{
-              fontFamily: "'Bricolage Grotesque', sans-serif",
-              fontWeight: 600,
-              fontSize: 36,
-              color: "#00111B",
-              letterSpacing: "-0.02em",
-            }}
-          >
-            {isAr ? "لماذا يعمل هذا" : "Why it works"}
-          </h2>
-
-          <div className="grid gap-6 sm:grid-cols-3">
-            {WHY_ITEMS.map((item) => (
-              <div
-                key={item.headlineEn}
-                className="rounded-2xl p-8 text-center"
-                style={{
-                  background: "#FFFFFF",
-                  border: "1px solid #E2E8F0",
-                  boxShadow:
-                    "0 1px 2px rgba(0,17,27,0.04), 0 4px 12px rgba(0,17,27,0.04), 0 12px 32px rgba(0,17,27,0.06)",
-                }}
-              >
-                <div
-                  className="mx-auto mb-5 flex size-16 items-center justify-center rounded-full"
-                  style={{ background: "#EDFFF5" }}
-                >
-                  <item.Icon size={28} color="#05A049" strokeWidth={1.75} />
-                </div>
-                <p
-                  className="mb-2"
-                  style={{
-                    fontFamily: "'Manrope', sans-serif",
-                    fontWeight: 600,
-                    fontSize: 18,
-                    color: "#00111B",
-                  }}
-                >
-                  {isAr ? item.headlineAr : item.headlineEn}
-                </p>
-                <p
-                  style={{
-                    fontFamily: "'Inter', sans-serif",
-                    fontSize: 14,
-                    color: "#475569",
-                    lineHeight: 1.6,
-                  }}
-                >
-                  {isAr ? item.bodyAr : item.bodyEn}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ── Footer ────────────────────────────────────────────────── */}
       <footer
-        className="mt-8 border-t px-6 py-12 sm:px-12"
-        style={{ borderColor: "#E2E8F0" }}
+        className="px-6 py-12 sm:px-12"
+        style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}
       >
         <div className="mx-auto flex max-w-5xl flex-col items-start justify-between gap-8 sm:flex-row sm:items-center">
           <div className="space-y-2">
-            <Wordmark variant="full" size="sm" />
+            <Wordmark variant="full" size="sm" color="#F0FDF4" />
             <p
               className="max-w-sm leading-relaxed"
               style={{
                 fontFamily: "'Inter', sans-serif",
                 fontSize: 12,
-                color: "#94A3B8",
+                color: "#4B5563",
               }}
             >
               {isAr
-                ? "تعليمي فقط، ليس نصيحة مالية. عملات VAL افتراضية — للتجميل والخير فقط، غير قابلة للاسترداد. شراكة Aldar × Valura."
-                : "Educational only, not financial advice. VAL Coins are virtual — for cosmetics and charity only, never redeemable. An Aldar × Valura partnership."}
+                ? "تعليمي فقط، ليس نصيحة مالية. عملات VAL افتراضية. شراكة Aldar × Valura."
+                : "Educational only, not financial advice. VAL Coins are virtual, never redeemable. An Aldar × Valura partnership."}
             </p>
           </div>
           <div className="flex gap-6">
@@ -346,12 +443,14 @@ export default function HomePage({
               <Link
                 key={l}
                 href="#"
-                className="transition-colors hover:text-[#00111B]"
                 style={{
                   fontFamily: "'Inter', sans-serif",
                   fontSize: 13,
-                  color: "#94A3B8",
+                  color: "#4B5563",
+                  transition: "color 150ms",
                 }}
+                onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "#9CA3AF")}
+                onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "#4B5563")}
               >
                 {l}
               </Link>
@@ -365,45 +464,45 @@ export default function HomePage({
 
 // ── Static data ────────────────────────────────────────────────────────────────
 
+const STATS = [
+  { value: "15", labelEn: "financial worlds", labelAr: "عالماً مالياً" },
+  { value: "EN/AR", labelEn: "fully bilingual", labelAr: "ثنائي اللغة" },
+  { value: "100%", labelEn: "Sharia-aware", labelAr: "متوافق مع الشريعة" },
+  { value: "Free", labelEn: "always free", labelAr: "مجاني دائماً" },
+];
+
+const WORLDS = [
+  { enTitle: "Marina Mile — Budgeting Basics",        arTitle: "مارينا مايل — أساسيات الميزانية" },
+  { enTitle: "Skyline Heights — Smart Saving",        arTitle: "سكايلاين هايتس — الادخار الذكي" },
+  { enTitle: "Souk of Savings — Goal Setting",        arTitle: "سوق المدخرات — تحديد الأهداف" },
+  { enTitle: "Dirham Desert — Investing 101",         arTitle: "صحراء الدرهم — مبادئ الاستثمار" },
+  { enTitle: "Loan Lighthouse — Debt & Loans",       arTitle: "منارة القروض — الديون والقروض" },
+  { enTitle: "Card Canyon — Credit Cards",            arTitle: "وادي البطاقات — البطاقات الائتمانية" },
+];
+
 const CAST = [
   {
-    initial: "M",
-    name: "Mohammed",
-    role: "Emirati, government",
-    roleAr: "إماراتي، قطاع حكومي",
-    bg: "#EDFFF5",
-    color: "#059669",
-    quote: "I never knew what an emergency fund actually meant until Atlas showed me.",
+    initial: "M", name: "Mohammed", bg: "rgba(34,197,94,0.12)", color: "#22C55E",
+    role: "Emirati, government",    roleAr: "إماراتي، قطاع حكومي",
+    quote: "I never knew what an emergency fund meant until Atlas showed me.",
     quoteAr: "لم أكن أعرف ما يعني صندوق الطوارئ حتى شرحه لي الأطلس.",
   },
   {
-    initial: "R",
-    name: "Riya",
-    role: "Indian expat, engineer",
-    roleAr: "مغتربة هندية، مهندسة",
-    bg: "#E8F4FF",
-    color: "#1A6BAD",
+    initial: "R", name: "Riya", bg: "rgba(59,130,246,0.12)", color: "#60A5FA",
+    role: "Indian expat, engineer", roleAr: "مغتربة هندية، مهندسة",
     quote: "Planning for gratuity while paying rent felt impossible. Now I have a system.",
     quoteAr: "كان التخطيط للمكافأة مع دفع الإيجار مستحيلاً. الآن لدي نظام.",
   },
   {
-    initial: "F",
-    name: "Fatima",
-    role: "Emirati, teacher",
-    roleAr: "إماراتية، معلمة",
-    bg: "#FFF8E8",
-    color: "#A07C30",
-    quote: "The Sharia module finally explained things in a way that felt right for me.",
-    quoteAr: "وحدة الشريعة أخيراً شرحت الأمور بطريقة تناسبني.",
+    initial: "F", name: "Fatima", bg: "rgba(245,158,11,0.12)", color: "#FCD34D",
+    role: "Emirati, teacher",       roleAr: "إماراتية، معلمة",
+    quote: "The Sharia module finally explained things in a way that felt right.",
+    quoteAr: "وحدة الشريعة شرحت الأمور بطريقة تناسبني أخيراً.",
   },
   {
-    initial: "A",
-    name: "Arjun",
-    role: "Indian expat, retail",
-    roleAr: "مغترب هندي، تجزئة",
-    bg: "#EDFFF5",
-    color: "#0D7A5A",
-    quote: "Sending money home while saving here — Atlas made both feel possible.",
+    initial: "A", name: "Arjun", bg: "rgba(168,85,247,0.12)", color: "#C084FC",
+    role: "Indian expat, retail",   roleAr: "مغترب هندي، تجزئة",
+    quote: "Sending money home while saving here — Atlas made both possible.",
     quoteAr: "إرسال الأموال للوطن مع الادخار هنا — أطلس جعل الأمرين ممكنين.",
   },
 ];
@@ -411,23 +510,23 @@ const CAST = [
 const WHY_ITEMS = [
   {
     Icon: Globe,
-    headlineEn: "Bilingual EN / AR",
-    headlineAr: "ثنائي اللغة: عربي وإنجليزي",
-    bodyEn: "Switch languages mid-session. Every lesson, quiz, and story is native in both.",
-    bodyAr: "غيّر اللغة في أي وقت. كل درس واختبار وقصة أصيل في كلتا اللغتين.",
+    enTitle: "Bilingual EN / AR",
+    arTitle: "ثنائي اللغة: عربي وإنجليزي",
+    enBody: "Switch languages mid-session. Every lesson, quiz, and story is native in both.",
+    arBody: "غيّر اللغة في أي وقت. كل درس واختبار وقصة أصيل في كلتا اللغتين.",
   },
   {
     Icon: ShieldCheck,
-    headlineEn: "Sharia-aware curriculum",
-    headlineAr: "منهج متوافق مع الشريعة",
-    bodyEn: "Covers Islamic finance, riba, takaful, and Sharia-compliant investing — no shortcuts.",
-    bodyAr: "يغطي التمويل الإسلامي، الربا، التكافل، والاستثمار المتوافق مع الشريعة.",
+    enTitle: "Sharia-aware curriculum",
+    arTitle: "منهج متوافق مع الشريعة",
+    enBody: "Covers Islamic finance, riba, takaful, and Sharia-compliant investing.",
+    arBody: "يغطي التمويل الإسلامي، الربا، التكافل، والاستثمار المتوافق مع الشريعة.",
   },
   {
-    Icon: BookOpen,
-    headlineEn: "VAL Coins for good",
-    headlineAr: "عملات VAL للخير",
-    bodyEn: "Coins unlock cosmetics and real charity donations — never redeemable for cash.",
-    bodyAr: "العملات تفتح التخصيصات والتبرعات الحقيقية — غير قابلة للاسترداد نقداً أبداً.",
+    Icon: TrendingUp,
+    enTitle: "Real UAE rules",
+    arTitle: "قواعد الإمارات الحقيقية",
+    enBody: "End-of-service gratuity, WPS, CBUAE regulations — hardcoded, not estimated.",
+    arBody: "مكافأة نهاية الخدمة، WPS، لوائح المصرف المركزي — مبرمجة، ليست تقديرات.",
   },
 ];
