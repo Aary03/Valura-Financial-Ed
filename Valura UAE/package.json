@@ -1,6 +1,6 @@
 {
-  "name": "valura-uae",
-  "displayName": "Aldar × Valura Atlas",
+  "name": "valura-atlas",
+  "displayName": "Valura Atlas",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -8,18 +8,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "db:generate": "prisma generate",
-    "db:migrate": "prisma migrate dev",
-    "db:push": "prisma db push",
-    "db:studio": "prisma studio",
-    "db:seed": "tsx prisma/seed.ts",
     "typecheck": "tsc --noEmit",
     "format": "prettier --write .",
-    "format:check": "prettier --check .",
-    "prepare": "husky"
-  },
-  "prisma": {
-    "seed": "tsx prisma/seed.ts"
+    "format:check": "prettier --check ."
   },
   "lint-staged": {
     "*.{ts,tsx}": [
