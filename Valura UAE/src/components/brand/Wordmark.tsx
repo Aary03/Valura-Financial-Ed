@@ -1,92 +1,80 @@
 /**
- * Aldar × Valura Atlas wordmark.
+ * Valura Atlas wordmark.
+ *
+ * Renders "Valura" in the display face with a tighter "Atlas" lockup.
+ * The dot/glyph before the name reads as a small globe/compass mark.
  *
  * Variants:
- *   full    — "Aldar × Valura Atlas"  (default, landing, login, footer)
- *   mini    — "Aldar × Atlas"         (HUD, tight header spaces)
- *   stacked — two-line layout         (app icon, onboarding)
+ *   full    — "Valura Atlas"   (default, landing, footer)
+ *   mini    — "Atlas"          (tight header spaces)
  *
- * Sizes:
- *   sm  14px   md  18px   lg  24px   xl  32px
+ * Sizes: sm 15px · md 18px · lg 24px · xl 34px
  */
 
 interface WordmarkProps {
-  variant?: "full" | "mini" | "stacked";
+  variant?: "full" | "mini";
   size?: "sm" | "md" | "lg" | "xl";
-  /** Override the wordmark color. Defaults to #00111B navy. */
+  /** Override the wordmark color. Defaults to ink. */
   color?: string;
+  /** Accent color for the "Atlas" word + mark. Defaults to brand green. */
+  accent?: string;
   className?: string;
+  /** Hide the leading globe mark. */
+  hideMark?: boolean;
 }
 
 const SIZE_MAP = {
-  sm: { fontSize: 14, xPad: 6, letterSpacing: "-0.01em" },
-  md: { fontSize: 18, xPad: 7, letterSpacing: "-0.015em" },
-  lg: { fontSize: 24, xPad: 8, letterSpacing: "-0.02em" },
-  xl: { fontSize: 32, xPad: 10, letterSpacing: "-0.025em" },
+  sm: { fontSize: 15, gap: 5, letterSpacing: "-0.01em" },
+  md: { fontSize: 18, gap: 6, letterSpacing: "-0.015em" },
+  lg: { fontSize: 24, gap: 8, letterSpacing: "-0.02em" },
+  xl: { fontSize: 34, gap: 10, letterSpacing: "-0.025em" },
 } as const;
 
 export default function Wordmark({
   variant = "full",
   size = "md",
-  color = "#00111B",
+  color = "var(--fg)",
+  accent = "var(--accent)",
   className,
+  hideMark = false,
 }: WordmarkProps) {
-  const { fontSize, xPad, letterSpacing } = SIZE_MAP[size];
+  const { fontSize, gap, letterSpacing } = SIZE_MAP[size];
 
-  const baseStyle: React.CSSProperties = {
+  const base: React.CSSProperties = {
     fontFamily: "'Bricolage Grotesque', sans-serif",
-    fontWeight: 600,
+    fontWeight: 700,
     fontSize,
     letterSpacing,
     lineHeight: 1,
-    color,
   };
 
-  const crossStyle: React.CSSProperties = {
-    fontFamily: "'Inter', sans-serif",
-    fontWeight: 400,
-    fontSize,
-    opacity: 0.55,
-    paddingLeft: xPad,
-    paddingRight: xPad,
-    letterSpacing: 0,
-    color,
-  };
+  const mark = (
+    <svg
+      width={fontSize * 1.05}
+      height={fontSize * 1.05}
+      viewBox="0 0 24 24"
+      fill="none"
+      aria-hidden
+      style={{ flexShrink: 0 }}
+    >
+      <circle cx="12" cy="12" r="10" stroke={accent} strokeWidth="2" />
+      <path
+        d="M2.5 12h19M12 2.5c2.6 2.6 4 5.9 4 9.5s-1.4 6.9-4 9.5c-2.6-2.6-4-5.9-4-9.5s1.4-6.9 4-9.5Z"
+        stroke={accent}
+        strokeWidth="1.6"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
 
-  if (variant === "stacked") {
-    return (
-      <div className={className} style={{ display: "inline-flex", flexDirection: "column", alignItems: "center", gap: 2 }}>
-        <span style={baseStyle}>Aldar</span>
-        <span style={{ ...baseStyle, fontSize: fontSize * 0.72 }}>
-          <span style={{ ...crossStyle, paddingLeft: 0, paddingRight: xPad * 0.7, fontSize: fontSize * 0.72 }}>×</span>
-          Valura Atlas
-        </span>
-      </div>
-    );
-  }
-
-  if (variant === "mini") {
-    return (
-      <span
-        className={className}
-        style={{ display: "inline-flex", alignItems: "baseline", whiteSpace: "nowrap" }}
-      >
-        <span style={baseStyle}>Aldar</span>
-        <span style={crossStyle}>×</span>
-        <span style={baseStyle}>Atlas</span>
-      </span>
-    );
-  }
-
-  // full
   return (
     <span
       className={className}
-      style={{ display: "inline-flex", alignItems: "baseline", whiteSpace: "nowrap" }}
+      style={{ display: "inline-flex", alignItems: "center", gap, whiteSpace: "nowrap" }}
     >
-      <span style={baseStyle}>Aldar</span>
-      <span style={crossStyle}>×</span>
-      <span style={baseStyle}>Valura Atlas</span>
+      {!hideMark && mark}
+      {variant === "full" && <span style={{ ...base, color }}>Valura</span>}
+      <span style={{ ...base, color: accent }}>Atlas</span>
     </span>
   );
 }
