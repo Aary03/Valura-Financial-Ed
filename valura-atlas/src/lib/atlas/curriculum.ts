@@ -7,7 +7,7 @@ import type { Module } from "./types";
  * We explain, we don't sell. Nothing here is investment advice.
  */
 export const MODULES: Module[] = [
-  // ─────────────────────────────────────────────────────────────────────────
+  // ═══════════════════════════════════════════════════════════════════════════
   {
     slug: "why-go-global",
     index: 1,
@@ -29,8 +29,18 @@ export const MODULES: Module[] = [
           },
           { kind: "diagram", id: "world-share", caption: "Approximate share of global stock-market value." },
           {
+            kind: "definition",
+            term: "Market value (market cap)",
+            text: "What the stock market thinks a company — or a whole country's companies — is worth right now. Add up every listed company and you get the size of a market.",
+          },
+          {
             kind: "paragraph",
-            text: "That single chart is the whole argument. When you invest only in India, you are betting your future on 3% of the world's companies — and skipping the businesses you already use every day. The phone in your hand, the software at your office, the chip inside almost everything: most of it is owned abroad.",
+            text: "That single chart is the whole argument. When you invest only in India, you are betting your future on 3% of the world's companies — and skipping the businesses you already use every day.",
+          },
+          { kind: "diagram", id: "brands-you-use", caption: "Products in your daily life, owned by companies listed abroad." },
+          {
+            kind: "paragraph",
+            text: "The phone in your hand, the software at your office, the card that taps at the store, the show you watched last night — most of those companies are listed in the US, not India. You're already a customer. Going global just lets you be an owner too.",
           },
           {
             kind: "stats",
@@ -50,6 +60,14 @@ export const MODULES: Module[] = [
           {
             kind: "paragraph",
             text: "A generation ago, investing abroad meant paperwork, agents, and patience. Today an Indian resident can do it from a phone in an afternoon — legally, within clear limits. The hard part was never access. It's understanding *what* you're doing. That's what the rest of Atlas is for.",
+          },
+          {
+            kind: "keytakeaways",
+            items: [
+              "Indian companies are ~3% of global stock value — big at home, small worldwide.",
+              "You already *use* the world's biggest companies; you just don't *own* them.",
+              "Investing abroad is legal for residents and easier than ever — the gap is knowledge, not access.",
+            ],
           },
         ],
         quiz: [
@@ -107,6 +125,11 @@ export const MODULES: Module[] = [
             text: "Think about what that means. If you hold an asset priced in dollars and the rupee weakens by ~3% in a year, that asset is worth ~3% more in rupee terms — *before* it has gone up a single cent on its own. Your home currency falling becomes a tailwind for money held abroad.",
           },
           {
+            kind: "definition",
+            term: "Currency exposure",
+            text: "Which currency your money is held in. Rupees rise and fall against the dollar; holding some dollars means part of your wealth moves the opposite way to the rupee.",
+          },
+          {
             kind: "callout",
             variant: "note",
             title: "The flip side",
@@ -114,7 +137,15 @@ export const MODULES: Module[] = [
           },
           {
             kind: "paragraph",
-            text: "This is also why holding *some* of your wealth in another currency is a kind of insurance. The day your rupee buys less, your global holdings are doing the opposite.",
+            text: "This is also why holding *some* of your wealth in another currency is a kind of insurance. The day your rupee buys less — on a foreign holiday, an overseas course, an imported gadget — your global holdings are doing the opposite.",
+          },
+          {
+            kind: "keytakeaways",
+            items: [
+              "The rupee has trended weaker vs the dollar — roughly 3–4% a year on average.",
+              "A weaker rupee lifts the rupee-value of dollar assets, even before they grow.",
+              "Holding some global assets is a hedge against your own currency slipping.",
+            ],
           },
         ],
         quiz: [
@@ -147,13 +178,18 @@ export const MODULES: Module[] = [
         slug: "diversification-properly",
         title: "Diversification, properly",
         hook: "Owning twenty Indian stocks is not the same as being diversified.",
-        minutes: 4,
+        minutes: 5,
         blocks: [
           {
             kind: "paragraph",
             text: "Most people think diversification means \"own a lot of different stocks.\" That's half of it. If all twenty of your stocks live in the same economy, share the same currency, and react to the same interest-rate decision — they tend to fall together on a bad day.",
           },
           { kind: "diagram", id: "concentration", caption: "More stocks ≠ more diversification if they share one economy." },
+          {
+            kind: "definition",
+            term: "Correlation",
+            text: "How much two investments move together. If they rise and fall in step, they're highly correlated — and owning both barely lowers your risk.",
+          },
           {
             kind: "paragraph",
             text: "Real diversification spreads you across things that *don't* move in lockstep: different economies, different currencies, different rate cycles. When one zigs, another zags. The whole portfolio gets steadier without you giving up growth.",
@@ -163,14 +199,28 @@ export const MODULES: Module[] = [
             items: [
               "**Across countries** — India, the US, and beyond don't boom and bust on the same calendar.",
               "**Across currencies** — rupee, dollar, and others rarely fall at once.",
-              "**Across sectors** — global tech, healthcare and energy that India is light on.",
+              "**Across sectors** — global tech, healthcare and semiconductors that India is light on.",
             ],
           },
+          { kind: "heading", text: "So what does a mix look like?" },
+          {
+            kind: "paragraph",
+            text: "There's no single right answer — it depends on your goals, age and nerves. But the shape of a globally-balanced portfolio is easy to picture: a strong home base, a meaningful slice of the world's largest market, and a little spread further out.",
+          },
+          { kind: "diagram", id: "allocation", caption: "One illustrative shape — not a recommendation." },
           {
             kind: "callout",
             variant: "key",
             title: "Rule of thumb",
             text: "Diversification works when your holdings have different reasons to go up and down. Same country, same currency, same story = not diversified, just longer.",
+          },
+          {
+            kind: "keytakeaways",
+            items: [
+              "Diversification is about low correlation, not the number of stocks.",
+              "Spreading across countries, currencies and sectors is what actually steadies a portfolio.",
+              "A globally-balanced mix keeps a home base and adds the world — proportions are personal.",
+            ],
           },
         ],
         quiz: [
@@ -199,10 +249,77 @@ export const MODULES: Module[] = [
           },
         ],
       },
+      {
+        slug: "the-cost-of-waiting",
+        title: "The cost of waiting",
+        hook: "The best day to start was years ago. The second best is today.",
+        minutes: 4,
+        blocks: [
+          {
+            kind: "paragraph",
+            text: "There's a quiet force behind every long-term portfolio: **compounding**. Your returns earn returns. Small at first, then — given enough years — almost unfair.",
+          },
+          {
+            kind: "definition",
+            term: "Compounding",
+            text: "When your gains start producing gains of their own. ₹100 that grows 12% becomes ₹112; next year that 12% is earned on ₹112, not ₹100. The snowball builds on itself.",
+          },
+          { kind: "diagram", id: "compounding", caption: "Illustrative growth of ₹1,00,000 over time." },
+          {
+            kind: "paragraph",
+            text: "Notice the shape of that curve. For the first decade it looks almost flat — easy to feel like nothing is happening. The real growth shows up in the *final* years. That's why **time in the market** matters far more than trying to pick the perfect moment to enter.",
+          },
+          {
+            kind: "callout",
+            variant: "example",
+            title: "Two friends",
+            text: "Riya starts at 25 and stops adding money at 35. Arjun starts at 35 and invests for 30 years straight. Because Riya's money compounded for longer, she can still end up ahead — despite investing for fewer years. Time does the heavy lifting.",
+          },
+          {
+            kind: "callout",
+            variant: "caution",
+            title: "An honest caveat",
+            text: "Markets don't move in a straight line. Some years are negative. Compounding rewards those who stay invested through the dips — not those who panic-sell at the bottom.",
+          },
+          {
+            kind: "keytakeaways",
+            items: [
+              "Compounding means returns earn returns — the effect is small early and large late.",
+              "Most long-term growth arrives in the final years, so starting early beats timing.",
+              "Staying invested through downturns is what lets compounding actually work.",
+            ],
+          },
+        ],
+        quiz: [
+          {
+            id: "q1",
+            prompt: "Why does starting early matter so much for compounding?",
+            choices: [
+              { id: "a", text: "Early investments are taxed less" },
+              { id: "b", text: "Most of the growth comes in the later years, so more time = far more growth" },
+              { id: "c", text: "Markets only rise when you're young" },
+            ],
+            correctId: "b",
+            explain:
+              "The compounding curve is flat early and steep late. Extra years at the start give your money the runway to reach the steep part.",
+          },
+          {
+            id: "q2",
+            prompt: "What does 'time in the market beats timing the market' mean?",
+            choices: [
+              { id: "a", text: "Staying invested for the long run usually beats trying to guess the perfect entry day" },
+              { id: "b", text: "You should trade every day" },
+            ],
+            correctId: "a",
+            explain:
+              "Predicting short-term moves is near-impossible. Staying invested lets compounding run — that's the reliable edge.",
+          },
+        ],
+      },
     ],
   },
 
-  // ─────────────────────────────────────────────────────────────────────────
+  // ═══════════════════════════════════════════════════════════════════════════
   {
     slug: "the-routes",
     index: 2,
@@ -238,7 +355,15 @@ export const MODULES: Module[] = [
             kind: "callout",
             variant: "note",
             title: "No single winner",
-            text: "A simple domestic ETF and a direct US brokerage account are both valid. The next two lessons unpack the two routes most people end up using: LRS and GIFT City.",
+            text: "A simple domestic ETF and a direct US brokerage account are both valid. The next lessons unpack the routes most people actually use: domestic funds, LRS, GIFT City, and going direct.",
+          },
+          {
+            kind: "keytakeaways",
+            items: [
+              "There are ~five common routes abroad, not one.",
+              "They trade off control, cost, convenience and paperwork.",
+              "The best route is the one that fits how you actually want to invest.",
+            ],
           },
         ],
         quiz: [
@@ -280,6 +405,77 @@ export const MODULES: Module[] = [
         ],
       },
       {
+        slug: "the-easy-door-funds-and-etfs",
+        title: "The easy door: funds & ETFs from India",
+        hook: "Global exposure, bought in rupees, with zero forex on your side.",
+        minutes: 5,
+        blocks: [
+          {
+            kind: "paragraph",
+            text: "For a lot of people, the simplest way to go global never leaves the Indian system. You buy an India-listed fund or ETF, in rupees, through the same demat account you already use — and the fund does the international work behind the scenes.",
+          },
+          { kind: "diagram", id: "feeder-fund", caption: "How a feeder fund passes your rupees through to global assets." },
+          {
+            kind: "definition",
+            term: "Feeder fund (fund of funds)",
+            text: "An Indian mutual fund that doesn't buy stocks directly — it puts your money into a larger global fund that does. You hold the Indian fund; it holds the world.",
+          },
+          { kind: "paragraph", text: "There are a few flavours of this door:" },
+          {
+            kind: "list",
+            items: [
+              "**Feeder funds / funds of funds** — an Indian fund that invests into a global one (e.g., a US-focused fund).",
+              "**India-listed international ETFs** — ETFs on the NSE/BSE that track a global index like the S&P 500 or Nasdaq 100.",
+              "**Domestic funds with some global exposure** — Indian funds that keep a slice abroad.",
+            ],
+          },
+          {
+            kind: "callout",
+            variant: "caution",
+            title: "Two things to watch",
+            text: "First, **cost**: each extra layer (your fund → the global fund) can add a small fee. Second, **price gaps**: an India-listed global ETF can sometimes trade a little above or below the value of what it holds, because demand here doesn't always match the asset abroad.",
+          },
+          {
+            kind: "paragraph",
+            text: "None of that makes this route bad — for hands-off investors it's often the cleanest. You just want to know the fund's expense ratio and whether you're paying a premium before you buy.",
+          },
+          {
+            kind: "keytakeaways",
+            items: [
+              "Funds & ETFs let you go global in rupees, inside your existing demat account.",
+              "A feeder fund holds a bigger global fund on your behalf — convenient, slightly layered.",
+              "Check the expense ratio, and whether an India-listed global ETF is trading at a premium.",
+            ],
+          },
+        ],
+        quiz: [
+          {
+            id: "q1",
+            prompt: "What is a feeder fund?",
+            choices: [
+              { id: "a", text: "A fund that lends money to companies" },
+              { id: "b", text: "An Indian fund that invests your money into a larger global fund" },
+              { id: "c", text: "A US bank account for Indians" },
+            ],
+            correctId: "b",
+            explain:
+              "A feeder (fund of funds) passes your rupees into an underlying global fund. You hold the Indian wrapper; it holds the world.",
+          },
+          {
+            id: "q2",
+            prompt: "A downside of the funds-&-ETFs route to watch for is…",
+            choices: [
+              { id: "a", text: "It's illegal" },
+              { id: "b", text: "Extra fee layers and possible premium/discount on India-listed global ETFs" },
+              { id: "c", text: "You must visit the US" },
+            ],
+            correctId: "b",
+            explain:
+              "Layers can add cost, and India-listed global ETFs sometimes trade away from the value of what they hold. Check both before buying.",
+          },
+        ],
+      },
+      {
         slug: "lrs-your-passport",
         title: "LRS — your $250,000 passport",
         hook: "Every resident can send money abroad. Here's the rulebook, in plain terms.",
@@ -290,6 +486,11 @@ export const MODULES: Module[] = [
             text: "The Liberalised Remittance Scheme (LRS) is the RBI's rule that lets every resident Indian send money abroad — for travel, education, gifts, or **investing** — up to a set amount each year. It's the legal pipe most global investing flows through.",
           },
           { kind: "diagram", id: "lrs-bucket", caption: "The LRS allowance and the TCS threshold." },
+          {
+            kind: "definition",
+            term: "TCS — Tax Collected at Source",
+            text: "A slice the bank collects upfront when you remit above a threshold. It is not an extra tax — it's a prepayment you set off against your total tax, or get refunded when you file your return.",
+          },
           { kind: "heading", text: "How money actually moves" },
           {
             kind: "steps",
@@ -304,11 +505,19 @@ export const MODULES: Module[] = [
             kind: "callout",
             variant: "caution",
             title: "About that 20% TCS",
-            text: "Send more than ₹10 lakh abroad in a year for investing and the bank collects 20% TCS at source. It feels like a tax — it isn't lost. TCS is a *prepayment*: you adjust it against your total tax, or get it refunded when you file your ITR.",
+            text: "Send more than ₹10 lakh abroad in a year for investing and the bank collects 20% TCS at source. It feels like a tax — it isn't lost. You adjust it against your total tax, or get it refunded when you file your ITR.",
           },
           {
             kind: "paragraph",
             text: "So the headline number — **$250,000 per person, per year** — is far more than most people will ever use. The limit is rarely the constraint. Understanding the TCS step is what saves you a surprise.",
+          },
+          {
+            kind: "keytakeaways",
+            items: [
+              "LRS lets each resident send up to $250,000 abroad per financial year.",
+              "Above ₹10 lakh of investment remittance, 20% TCS is collected upfront.",
+              "TCS is a prepayment — you reconcile or refund it when you file your ITR.",
+            ],
           },
         ],
         quiz: [
@@ -361,6 +570,11 @@ export const MODULES: Module[] = [
           },
           { kind: "diagram", id: "gift-city", caption: "GIFT City bridges Indian investors to global assets." },
           {
+            kind: "definition",
+            term: "IFSC",
+            text: "International Financial Services Centre — a zone (GIFT City) where financial business is done in foreign currency under a dedicated regulator (IFSCA), separate from India's domestic rules.",
+          },
+          {
             kind: "paragraph",
             text: "Through GIFT City you can reach US stocks and ETFs — sometimes straight into your Indian demat account — and invest in GIFT-based global funds. A growing number of platforms now offer this route, and it's becoming a real alternative to a direct overseas broker.",
           },
@@ -369,6 +583,14 @@ export const MODULES: Module[] = [
             variant: "key",
             title: "Why people like it",
             text: "The tax and reporting are often handled at the fund level, and you stay within an Indian-regulated environment. Less paperwork, familiar oversight — with a global reach.",
+          },
+          {
+            kind: "keytakeaways",
+            items: [
+              "GIFT City is India's IFSC — global access under Indian (IFSCA) regulation.",
+              "It can route US stocks, ETFs and global funds, sometimes into your demat.",
+              "The draw is simpler handling and familiar oversight — not zero tax or zero risk.",
+            ],
           },
         ],
         quiz: [
@@ -398,10 +620,76 @@ export const MODULES: Module[] = [
           },
         ],
       },
+      {
+        slug: "doing-it-yourself",
+        title: "Doing it yourself: a US brokerage",
+        hook: "Want the steering wheel? Here's what the direct route really involves.",
+        minutes: 4,
+        blocks: [
+          {
+            kind: "paragraph",
+            text: "If you want to choose exactly what you own, you open an account with a broker that gives Indian residents access to US markets, fund it through LRS, and buy shares yourself. More control — and a little more responsibility.",
+          },
+          {
+            kind: "definition",
+            term: "Fractional shares",
+            text: "A slice of a single share. If one share costs $200, you can buy ₹500 worth — about 0.0003 of a share. It means price-per-share never blocks you from owning a company.",
+          },
+          {
+            kind: "paragraph",
+            text: "The direct route has real advantages: you can buy *any* listed company, often in fractions, and you see exactly what you hold. The trade-off is that the tax and reporting are now **yours** to handle — there's no fund quietly doing it for you.",
+          },
+          {
+            kind: "callout",
+            variant: "note",
+            title: "Worth checking before you pick a broker",
+            text: "Is it a regulated, reputable platform? How do they hold your shares (custody)? What are the forex and brokerage charges? And how do they help at tax time — statements, dividend records, the documents you'll need for Schedule FA?",
+          },
+          {
+            kind: "callout",
+            variant: "caution",
+            title: "The responsibility that comes with control",
+            text: "Direct holdings mean you report foreign assets yourself and handle dividend/capital-gains tax in India. We cover all of that in Module 5 — don't go direct without reading it.",
+          },
+          {
+            kind: "keytakeaways",
+            items: [
+              "Going direct = open a US-access broker, fund via LRS, pick your own shares.",
+              "Fractional shares mean even pricey companies are within reach of small amounts.",
+              "You gain full control but own the tax and reporting work yourself.",
+            ],
+          },
+        ],
+        quiz: [
+          {
+            id: "q1",
+            prompt: "What do fractional shares let you do?",
+            choices: [
+              { id: "a", text: "Own a slice of a share, so a high price-per-share never blocks you" },
+              { id: "b", text: "Avoid all taxes" },
+              { id: "c", text: "Trade only whole companies" },
+            ],
+            correctId: "a",
+            explain:
+              "Fractional shares let you put in a fixed rupee amount and own part of a share — handy when one share costs hundreds of dollars.",
+          },
+          {
+            id: "q2",
+            prompt: "The main trade-off of the direct brokerage route is…",
+            choices: [
+              { id: "a", text: "You can't pick your own stocks" },
+              { id: "b", text: "More control, but the tax and reporting are now yours to handle" },
+            ],
+            correctId: "b",
+            explain:
+              "Direct access gives full control, but no fund is handling tax/reporting for you — that responsibility shifts to you (see Module 5).",
+          },
+        ],
+      },
     ],
   },
 
-  // ─────────────────────────────────────────────────────────────────────────
+  // ═══════════════════════════════════════════════════════════════════════════
   {
     slug: "moving-money",
     index: 3,
@@ -423,8 +711,13 @@ export const MODULES: Module[] = [
           },
           { kind: "diagram", id: "money-journey", caption: "₹100 from your account to a US asset." },
           {
+            kind: "definition",
+            term: "Forex spread",
+            text: "The small gap between the true market exchange rate and the rate you're actually given. It's how currency conversion quietly earns a margin on every transfer.",
+          },
+          {
             kind: "paragraph",
-            text: "Two quiet costs show up almost every time. First, **currency conversion**: turning rupees into dollars carries a spread — the gap between the real rate and the rate you're given. Second, **platform and brokerage fees**: small per-trade or per-remittance charges. Neither is dramatic, but on small or frequent transfers they add up.",
+            text: "Two quiet costs show up almost every time. First, **currency conversion**: turning rupees into dollars carries a spread. Second, **platform and brokerage fees**: small per-trade or per-remittance charges. Neither is dramatic, but on small or frequent transfers they add up.",
           },
           {
             kind: "stats",
@@ -439,6 +732,14 @@ export const MODULES: Module[] = [
             variant: "key",
             title: "The real-return formula",
             text: "Your true return = asset performance ± currency move − costs. Two investors can buy the same stock and end up in different places because of the other two.",
+          },
+          {
+            kind: "keytakeaways",
+            items: [
+              "Real return = asset performance ± currency move − costs.",
+              "Currency conversion carries a spread; platforms charge fees — both small, both real.",
+              "Costs bite hardest on small, frequent transfers.",
+            ],
           },
         ],
         quiz: [
@@ -468,10 +769,141 @@ export const MODULES: Module[] = [
           },
         ],
       },
+      {
+        slug: "fees-and-the-real-cost",
+        title: "Fees, spreads, and the real cost",
+        hook: "A ₹99 flat fee is nothing on ₹5 lakh — and brutal on ₹2,000.",
+        minutes: 4,
+        blocks: [
+          {
+            kind: "paragraph",
+            text: "Costs sound boring until you see how they scale. The trick is knowing *which kind* of cost you're paying, because flat fees and percentage fees behave very differently.",
+          },
+          {
+            kind: "compare",
+            columns: ["Cost type", "What it is", "Hurts most when…"],
+            rows: [
+              { label: "Flat fee", cells: ["A fixed charge per transfer or trade (e.g., a set ₹ amount)", "you invest small amounts often"] },
+              { label: "Percentage fee", cells: ["A % of the amount (forex spread, expense ratio)", "you invest large amounts or hold for years"] },
+              { label: "Expense ratio", cells: ["Annual % a fund charges to manage your money", "it compounds quietly over a long horizon"] },
+            ],
+          },
+          {
+            kind: "definition",
+            term: "Expense ratio",
+            text: "The yearly fee a fund charges, shown as a percentage. A 0.5% ratio takes ₹500 a year from every ₹1,00,000 — small-sounding, but it compounds against you over decades.",
+          },
+          {
+            kind: "callout",
+            variant: "example",
+            title: "Why small + frequent is the trap",
+            text: "A ₹100 flat fee on a ₹2,000 transfer is 5% gone before you start. The same ₹100 on a ₹2,00,000 transfer is 0.05% — basically nothing. Fewer, larger transfers usually beat many tiny ones.",
+          },
+          {
+            kind: "callout",
+            variant: "caution",
+            title: "Don't ignore the annual drag",
+            text: "A one-time fee you can shrug off. An expense ratio runs every year, against your whole balance, for as long as you hold — so over 20+ years even 0.5% vs 1% matters a lot.",
+          },
+          {
+            kind: "keytakeaways",
+            items: [
+              "Flat fees punish small, frequent transfers; percentage fees scale with size.",
+              "Expense ratios are small yearly %s that compound against you over time.",
+              "Fewer, larger transfers and lower-cost funds keep more of your return.",
+            ],
+          },
+        ],
+        quiz: [
+          {
+            id: "q1",
+            prompt: "A fixed ₹100 fee hurts the most when you…",
+            choices: [
+              { id: "a", text: "Transfer a large amount once" },
+              { id: "b", text: "Transfer tiny amounts frequently" },
+            ],
+            correctId: "b",
+            explain:
+              "A flat fee is a bigger *percentage* of a small transfer. ₹100 on ₹2,000 is 5%; on ₹2,00,000 it's 0.05%.",
+          },
+          {
+            id: "q2",
+            prompt: "Why does a fund's expense ratio matter over the long run?",
+            choices: [
+              { id: "a", text: "It's a one-time charge" },
+              { id: "b", text: "It's charged every year on your whole balance, so it compounds against you" },
+            ],
+            correctId: "b",
+            explain:
+              "Even 0.5% a year, taken on your entire balance over decades, quietly eats into compounding. Lower ratios keep more for you.",
+          },
+        ],
+      },
+      {
+        slug: "currency-friend-or-foe",
+        title: "Currency: friend or foe?",
+        hook: "When you hold dollars, the exchange rate becomes part of your return.",
+        minutes: 4,
+        blocks: [
+          {
+            kind: "paragraph",
+            text: "We saw in Module 1 that the rupee tends to drift weaker over time. For a global investor that's usually a quiet tailwind — but it's worth understanding the full picture, both ways.",
+          },
+          { kind: "diagram", id: "rupee-drift", caption: "The long-run direction has favoured the dollar — but never every year." },
+          {
+            kind: "definition",
+            term: "Hedging",
+            text: "Paying a small cost to cancel out currency movement, so your return depends only on the asset — not on whether the rupee rose or fell. Useful for short horizons, less so for long ones.",
+          },
+          {
+            kind: "paragraph",
+            text: "Should you hedge the currency? For most long-term investors, **no** — the rupee's long drift tends to work in your favour, and hedging costs money every year. Hedging makes more sense when you'll need the money soon and can't afford a short-term swing.",
+          },
+          {
+            kind: "callout",
+            variant: "note",
+            title: "Two ways currency shows up",
+            text: "When you *invest*, a weaker rupee lifts your rupee returns. When you *spend abroad* — fees, travel, courses — a weaker rupee costs you more. Global holdings quietly offset that second one.",
+          },
+          {
+            kind: "keytakeaways",
+            items: [
+              "Holding dollars makes the exchange rate part of your return — up or down.",
+              "Long-term, the rupee's drift has favoured global holdings; short-term it's noisy.",
+              "Most long-horizon investors don't hedge; hedging suits money you'll need soon.",
+            ],
+          },
+        ],
+        quiz: [
+          {
+            id: "q1",
+            prompt: "For a long-term investor, currency movement is usually…",
+            choices: [
+              { id: "a", text: "A quiet tailwind, given the rupee's long-run drift" },
+              { id: "b", text: "A guaranteed loss" },
+              { id: "c", text: "Completely irrelevant" },
+            ],
+            correctId: "a",
+            explain:
+              "Over long periods the rupee has tended to weaken, which lifts the rupee-value of dollar assets. It's noisy year to year, helpful over decades.",
+          },
+          {
+            id: "q2",
+            prompt: "When does hedging currency make the most sense?",
+            choices: [
+              { id: "a", text: "When you'll need the money soon and can't risk a short-term swing" },
+              { id: "b", text: "Always, for everyone" },
+            ],
+            correctId: "a",
+            explain:
+              "Hedging costs money each year, so it suits short horizons where a sudden currency move would hurt — not decades-long investing.",
+          },
+        ],
+      },
     ],
   },
 
-  // ─────────────────────────────────────────────────────────────────────────
+  // ═══════════════════════════════════════════════════════════════════════════
   {
     slug: "us-markets",
     index: 4,
@@ -492,6 +924,11 @@ export const MODULES: Module[] = [
             text: "Strip away the jargon and a share is simple: it's a small piece of ownership in a real company. Own one share and you own a tiny slice of its profits, its growth, and its future.",
           },
           { kind: "diagram", id: "us-ownership", caption: "One share vs an index of many companies." },
+          {
+            kind: "definition",
+            term: "Share (stock)",
+            text: "A unit of ownership in a company. Own shares and you own a proportional piece of the business — not a loan to it, and never a guarantee of profit.",
+          },
           { kind: "heading", text: "Indices: baskets with names" },
           {
             kind: "paragraph",
@@ -502,6 +939,14 @@ export const MODULES: Module[] = [
             variant: "note",
             title: "Why beginners like indices",
             text: "Buying one index fund spreads you across hundreds of companies at once. You stop trying to pick the single winner and simply own the whole field.",
+          },
+          {
+            kind: "keytakeaways",
+            items: [
+              "A share is part-ownership of a company — not a loan, not a guarantee.",
+              "An index (like the S&P 500) is a named basket of many companies.",
+              "You own an index through a fund or ETF that holds the basket for you.",
+            ],
           },
         ],
         quiz: [
@@ -542,17 +987,216 @@ export const MODULES: Module[] = [
           },
         ],
       },
+      {
+        slug: "index-etf-or-single-stock",
+        title: "Index, ETF, or single stock?",
+        hook: "Three ways to buy the same market — with very different effort.",
+        minutes: 5,
+        blocks: [
+          {
+            kind: "paragraph",
+            text: "Once you know what a share and an index are, the real choice is *how* you buy in. Three options cover almost everyone — and they sit on a spectrum from hands-on to hands-off.",
+          },
+          { kind: "diagram", id: "index-etf-stock", caption: "Effort and diversification across the three." },
+          {
+            kind: "definition",
+            term: "ETF — Exchange-Traded Fund",
+            text: "A basket of investments that trades like a single stock on an exchange. You get instant diversification, and you can buy or sell any time the market is open.",
+          },
+          {
+            kind: "list",
+            items: [
+              "**Single stock** — you pick one company. Highest potential reward, highest risk, most homework. One bad call hurts.",
+              "**ETF** — a basket you buy and sell live, like a stock. Diversified and flexible, with a small annual fee.",
+              "**Index fund** — a basket you buy at end-of-day price, set-and-forget. The simplest way to own a whole market.",
+            ],
+          },
+          {
+            kind: "callout",
+            variant: "key",
+            title: "The honest starting point",
+            text: "For most beginners, a low-cost index fund or broad ETF is the calmest first step. You own hundreds of companies at once, so no single one can sink you. Single stocks are a choice you can add later, with money you can afford to be wrong on.",
+          },
+          {
+            kind: "keytakeaways",
+            items: [
+              "Single stock = most control, most risk, most homework.",
+              "An ETF is a diversified basket that trades live like a share.",
+              "A broad index fund or ETF is the simplest, steadiest way to start.",
+            ],
+          },
+        ],
+        quiz: [
+          {
+            id: "q1",
+            prompt: "What is an ETF?",
+            choices: [
+              { id: "a", text: "A single company's share" },
+              { id: "b", text: "A basket of investments that trades like a stock on an exchange" },
+              { id: "c", text: "A type of bank deposit" },
+            ],
+            correctId: "b",
+            explain:
+              "An ETF holds many investments but trades like one stock — instant diversification with the flexibility to buy or sell live.",
+          },
+          {
+            id: "q2",
+            prompt: "Which is generally the calmest starting point for a beginner?",
+            choices: [
+              { id: "a", text: "A single hot stock" },
+              { id: "b", text: "A low-cost broad index fund or ETF" },
+            ],
+            correctId: "b",
+            explain:
+              "A broad index fund/ETF spreads you across hundreds of companies, so no single one can sink you — a steadier first step.",
+          },
+        ],
+      },
+      {
+        slug: "how-to-read-a-us-stock",
+        title: "How to read a US stock",
+        hook: "Ticker, market cap, P/E — three numbers, demystified.",
+        minutes: 5,
+        blocks: [
+          {
+            kind: "paragraph",
+            text: "Open any US stock page and you'll see a wall of numbers. You don't need most of them. Three terms unlock the basics — and none of this is a buy or sell signal, just literacy.",
+          },
+          {
+            kind: "definition",
+            term: "Ticker",
+            text: "A company's short code on the exchange — like AAPL for Apple or MSFT for Microsoft. It's just the name the market uses to trade it.",
+          },
+          {
+            kind: "definition",
+            term: "Market cap",
+            text: "The company's total market value: share price × number of shares. It tells you the *size* of the company — large, mid or small — which hints at how steady or volatile it tends to be.",
+          },
+          {
+            kind: "definition",
+            term: "P/E ratio (price-to-earnings)",
+            text: "Price per share ÷ earnings per share. A rough gauge of how much investors pay for each unit of profit. A high P/E means the market expects strong growth; a low one means modest expectations. Context matters — it's not 'cheap vs expensive' on its own.",
+          },
+          {
+            kind: "callout",
+            variant: "caution",
+            title: "What these numbers are *not*",
+            text: "None of these tell you whether a stock will go up. A low P/E isn't automatically a bargain; a big market cap isn't automatically safe. They're vocabulary for understanding a company — not a formula for picking one.",
+          },
+          {
+            kind: "paragraph",
+            text: "Read enough stock pages and the words stop being intimidating. You'll know a $3-trillion-cap, low-growth giant from a small, fast-growing, high-P/E newcomer — and why they behave differently.",
+          },
+          {
+            kind: "keytakeaways",
+            items: [
+              "Ticker = the trading code; market cap = the company's total size.",
+              "P/E roughly shows how much investors pay per unit of profit — context-dependent.",
+              "These are literacy tools, not buy/sell signals.",
+            ],
+          },
+        ],
+        quiz: [
+          {
+            id: "q1",
+            prompt: "What does 'market cap' measure?",
+            choices: [
+              { id: "a", text: "The company's total market value (price × shares)" },
+              { id: "b", text: "The company's bank balance" },
+              { id: "c", text: "The dividend it pays" },
+            ],
+            correctId: "a",
+            explain: "Market cap = share price × number of shares — the market's view of the whole company's size.",
+          },
+          {
+            id: "q2",
+            prompt: "A high P/E ratio usually signals that…",
+            choices: [
+              { id: "a", text: "The stock is definitely overpriced" },
+              { id: "b", text: "Investors expect strong future growth — context still matters" },
+            ],
+            correctId: "b",
+            explain:
+              "A high P/E means the market is paying a lot per unit of current profit, usually expecting growth. It's not automatically 'too expensive'.",
+          },
+        ],
+      },
+      {
+        slug: "dividends-splits-and-volatility",
+        title: "Dividends, splits & what to expect",
+        hook: "What actually lands in your account — and what's just noise.",
+        minutes: 4,
+        blocks: [
+          {
+            kind: "definition",
+            term: "Dividend",
+            text: "A share of profits a company pays out to shareholders, usually every quarter in the US. Not every company pays one — many growth companies reinvest instead.",
+          },
+          {
+            kind: "paragraph",
+            text: "Dividends are real cash that shows up in your account. You can spend them or **reinvest** them to buy more shares — which feeds straight back into compounding. (Remember from Module 5: US dividends have 25% withheld, and you claim that credit in India.)",
+          },
+          {
+            kind: "definition",
+            term: "Stock split",
+            text: "A company divides each share into more shares at a lower price — e.g., one $1,000 share becomes ten $100 shares. Your total value doesn't change; the price-per-share just gets more accessible.",
+          },
+          {
+            kind: "callout",
+            variant: "note",
+            title: "A split is not free money",
+            text: "If a stock splits 10-for-1, you own 10× the shares at 1/10th the price. Same pie, more slices. Headlines make splits sound exciting — they're mostly cosmetic.",
+          },
+          { kind: "heading", text: "What to expect from the ride" },
+          {
+            kind: "paragraph",
+            text: "Markets don't move in straight lines. A 10–20% drop in a year is normal, not a crisis. The investors who do well aren't the ones who avoid every dip — they're the ones who keep contributing and don't sell in a panic. Expect volatility, and it stops scaring you.",
+          },
+          {
+            kind: "keytakeaways",
+            items: [
+              "Dividends are cash payouts; reinvesting them powers compounding.",
+              "A stock split changes the share count and price, not your total value.",
+              "Sharp ups and downs are normal — staying invested is the real skill.",
+            ],
+          },
+        ],
+        quiz: [
+          {
+            id: "q1",
+            prompt: "After a 10-for-1 stock split, what happens to your holding?",
+            choices: [
+              { id: "a", text: "You own 10× the shares at 1/10th the price — same total value" },
+              { id: "b", text: "Your money grows 10×" },
+              { id: "c", text: "You lose 90%" },
+            ],
+            correctId: "a",
+            explain: "A split just slices the pie into more pieces. More shares, lower price each, identical total value.",
+          },
+          {
+            id: "q2",
+            prompt: "A 15% drop in a single year is best seen as…",
+            choices: [
+              { id: "a", text: "A normal part of investing" },
+              { id: "b", text: "A guaranteed sign to sell everything" },
+            ],
+            correctId: "a",
+            explain:
+              "Double-digit dips happen regularly. Staying invested and continuing to contribute beats panic-selling at the bottom.",
+          },
+        ],
+      },
     ],
   },
 
-  // ─────────────────────────────────────────────────────────────────────────
+  // ═══════════════════════════════════════════════════════════════════════════
   {
     slug: "tax-and-rules",
     index: 5,
     title: "Tax & rules",
     tagline: "The part everyone avoids — made simple",
     summary:
-      "Two taxes, a handful of regulators. Get these straight once and global investing stops feeling scary.",
+      "Two taxes, a disclosure, an estate-tax gotcha, and a handful of regulators. Get these straight once and global investing stops feeling scary.",
     accent: "amber",
     lessons: [
       {
@@ -566,10 +1210,15 @@ export const MODULES: Module[] = [
             text: "Tax is where most people freeze. It's simpler than it looks. For US investments held by an Indian resident, two taxes do almost all the work.",
           },
           { kind: "diagram", id: "tax-flow", caption: "How dividends and capital gains are taxed." },
+          {
+            kind: "definition",
+            term: "DTAA — Double Taxation Avoidance Agreement",
+            text: "A treaty between India and the US so the same income isn't fully taxed twice. Tax paid in one country becomes a credit in the other.",
+          },
           { kind: "heading", text: "1. Dividends" },
           {
             kind: "paragraph",
-            text: "When a US company pays you a dividend, the US withholds **25%** before it reaches you — the rate set by the India–US tax treaty (DTAA). The good news: that 25% becomes a **credit** you claim in India, so the same income isn't taxed twice.",
+            text: "When a US company pays you a dividend, the US withholds **25%** before it reaches you — the rate set by the India–US treaty (DTAA). The good news: that 25% becomes a **credit** you claim in India, so the same income isn't taxed twice.",
           },
           { kind: "heading", text: "2. Capital gains" },
           {
@@ -580,7 +1229,15 @@ export const MODULES: Module[] = [
             kind: "callout",
             variant: "caution",
             title: "One more thing: reporting",
-            text: "Foreign holdings must be declared in your Indian tax return (the Schedule FA / foreign-assets section). It's a disclosure, not an extra tax — but skipping it causes real trouble. When in doubt, use a tax advisor.",
+            text: "Foreign holdings must be declared in your Indian tax return (Schedule FA). It's a disclosure, not an extra tax — but skipping it causes real trouble. The next lesson covers it.",
+          },
+          {
+            kind: "keytakeaways",
+            items: [
+              "US dividends: 25% withheld there, claimed as a credit here (thanks to the DTAA).",
+              "Capital gains: not taxed by the US for you — paid in India (LTCG 12.5% after 24m, else slab).",
+              "You also have to *report* foreign holdings — see the next lesson.",
+            ],
           },
         ],
         quiz: [
@@ -610,14 +1267,145 @@ export const MODULES: Module[] = [
           },
           {
             id: "q3",
-            prompt: "Do you need to declare foreign holdings in your Indian tax return?",
+            prompt: "What does the DTAA do?",
             choices: [
-              { id: "a", text: "Yes — in the foreign-assets schedule" },
-              { id: "b", text: "No, never" },
+              { id: "a", text: "Lets the same income be taxed twice, fully" },
+              { id: "b", text: "Prevents full double taxation — tax in one country credits against the other" },
+            ],
+            correctId: "b",
+            explain:
+              "The India–US DTAA ensures you aren't taxed in full by both countries on the same income. The US withholding becomes a credit in India.",
+          },
+        ],
+      },
+      {
+        slug: "reporting-schedule-fa",
+        title: "Reporting: Schedule FA",
+        hook: "The disclosure that keeps your global investing clean.",
+        minutes: 4,
+        blocks: [
+          {
+            kind: "paragraph",
+            text: "Here's the rule people most often miss: if you're a resident Indian and you hold assets abroad — US shares, ETFs, a foreign brokerage balance — you must **declare** them in your income-tax return, even if you didn't sell anything and earned nothing.",
+          },
+          {
+            kind: "definition",
+            term: "Schedule FA",
+            text: "The 'Foreign Assets' section of the Indian income-tax return where residents disclose overseas holdings — shares, funds, accounts — held during the year.",
+          },
+          {
+            kind: "callout",
+            variant: "key",
+            title: "Disclosure, not double tax",
+            text: "Schedule FA doesn't add a tax. It's transparency: you're telling the tax department what you hold abroad. The tax itself is the dividend/capital-gains tax from the previous lesson.",
+          },
+          {
+            kind: "paragraph",
+            text: "Why take it seriously? Non-disclosure of foreign assets falls under strict rules and can mean significant penalties — far more painful than the tax ever would have been. The fix is simple: keep your broker's year-end statements, and report.",
+          },
+          {
+            kind: "callout",
+            variant: "caution",
+            title: "When in doubt, get help",
+            text: "Foreign-asset reporting has details — currency conversion dates, peak balances, account info. A qualified CA who has done it before is worth it the first year. After that, it's routine.",
+          },
+          {
+            kind: "keytakeaways",
+            items: [
+              "Residents must declare foreign holdings in Schedule FA — even with no sale or income.",
+              "It's a disclosure, not an extra tax.",
+              "Skipping it risks heavy penalties; keep broker statements and report (a CA helps year one).",
+            ],
+          },
+        ],
+        quiz: [
+          {
+            id: "q1",
+            prompt: "Do you need to report US shares you hold but didn't sell this year?",
+            choices: [
+              { id: "a", text: "No — only if you sold them" },
+              { id: "b", text: "Yes — holdings are disclosed in Schedule FA regardless of selling" },
+            ],
+            correctId: "b",
+            explain:
+              "Schedule FA is about *holding* foreign assets, not just selling. Residents disclose them even with no transaction.",
+          },
+          {
+            id: "q2",
+            prompt: "Schedule FA is best described as…",
+            choices: [
+              { id: "a", text: "An extra tax on foreign assets" },
+              { id: "b", text: "A disclosure of foreign assets — transparency, not a new tax" },
+            ],
+            correctId: "b",
+            explain:
+              "It's a reporting requirement. The actual tax is the dividend/capital-gains tax; Schedule FA just discloses what you hold.",
+          },
+        ],
+      },
+      {
+        slug: "the-estate-tax-gotcha",
+        title: "The estate-tax gotcha",
+        hook: "The rule almost nobody mentions — and you should know.",
+        minutes: 4,
+        blocks: [
+          {
+            kind: "paragraph",
+            text: "Here's one the brochures skip. If you hold US assets *directly* and the holder passes away, the **US** can levy an estate tax on those assets — even for non-resident Indians who never set foot there.",
+          },
+          { kind: "diagram", id: "estate-tax", caption: "The threshold and why it matters." },
+          {
+            kind: "definition",
+            term: "US estate tax (for non-residents)",
+            text: "A tax the US can charge on US-situated assets (like directly-held US stocks) when the owner dies. For non-residents the exemption is small — around $60,000 — and rates above it can climb steeply.",
+          },
+          {
+            kind: "paragraph",
+            text: "This isn't a reason to avoid global investing — it's a reason to *plan* once your US holdings get sizeable. Many investors simply never learn this until it's relevant, and that's the problem we're fixing here.",
+          },
+          {
+            kind: "callout",
+            variant: "note",
+            title: "Ways people manage it",
+            text: "Holding US exposure through funds or GIFT-City structures (instead of direct US shares), joint holding, nominations, and term insurance to cover any liability are common approaches. The right one depends on your situation — this is exactly where professional advice earns its fee.",
+          },
+          {
+            kind: "callout",
+            variant: "caution",
+            title: "Not advice",
+            text: "Estate tax is genuinely technical and personal. Treat this as awareness, then talk to a cross-border tax/estate advisor before your US holdings grow large.",
+          },
+          {
+            kind: "keytakeaways",
+            items: [
+              "The US can tax directly-held US assets on the owner's death — even for non-residents.",
+              "The non-resident exemption is small (~$60,000); above it, rates climb.",
+              "Funds/GIFT structures, joint holding and insurance are common ways to plan — get advice.",
+            ],
+          },
+        ],
+        quiz: [
+          {
+            id: "q1",
+            prompt: "Can US estate tax affect a non-resident Indian's directly-held US stocks?",
+            choices: [
+              { id: "a", text: "No, never" },
+              { id: "b", text: "Yes — US-situated assets can be subject to it, with a small (~$60k) exemption" },
+            ],
+            correctId: "b",
+            explain:
+              "Directly-held US assets are US-situated, so US estate tax can apply on the owner's death — with only a small exemption for non-residents.",
+          },
+          {
+            id: "q2",
+            prompt: "A common way investors reduce this exposure is…",
+            choices: [
+              { id: "a", text: "Holding US exposure via funds/GIFT structures rather than direct shares" },
+              { id: "b", text: "Never telling anyone they invest" },
             ],
             correctId: "a",
             explain:
-              "Yes. Foreign assets go in Schedule FA. It's a disclosure, not a new tax — but leaving it out can mean penalties.",
+              "Owning US exposure through a fund or GIFT-City structure (vs direct US shares), plus joint holding and insurance, are common approaches — with advice.",
           },
         ],
       },
@@ -637,6 +1425,14 @@ export const MODULES: Module[] = [
             variant: "key",
             title: "The short version",
             text: "India's RBI controls money leaving the country; SEBI and IFSCA watch the markets and GIFT City. In the US, the SEC and FINRA oversee companies and brokers. Layers of oversight — working for you.",
+          },
+          {
+            kind: "keytakeaways",
+            items: [
+              "RBI controls money leaving India (LRS); SEBI regulates markets; IFSCA oversees GIFT City.",
+              "In the US, the SEC oversees companies and FINRA oversees brokers.",
+              "Multiple regulators on both sides exist to protect you — not to block you.",
+            ],
           },
         ],
         quiz: [
@@ -661,8 +1457,7 @@ export const MODULES: Module[] = [
               { id: "c", text: "RBI" },
             ],
             correctId: "a",
-            explain:
-              "IFSCA is the dedicated regulator for India's IFSC at GIFT City.",
+            explain: "IFSCA is the dedicated regulator for India's IFSC at GIFT City.",
           },
         ],
       },

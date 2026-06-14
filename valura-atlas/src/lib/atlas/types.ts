@@ -23,7 +23,13 @@ export type DiagramId =
   | "money-journey"
   | "us-ownership"
   | "tax-flow"
-  | "regulators";
+  | "regulators"
+  | "brands-you-use"
+  | "feeder-fund"
+  | "index-etf-stock"
+  | "estate-tax"
+  | "allocation"
+  | "compounding";
 
 export type ContentBlock =
   | { kind: "heading"; text: string }
@@ -44,7 +50,9 @@ export type ContentBlock =
     }
   | { kind: "steps"; items: { title: string; text: string }[] }
   | { kind: "list"; ordered?: boolean; items: string[] }
-  | { kind: "quote"; text: string; cite?: string };
+  | { kind: "quote"; text: string; cite?: string }
+  | { kind: "definition"; term: string; text: string }
+  | { kind: "keytakeaways"; items: string[] };
 
 export interface QuizQuestion {
   id: string;

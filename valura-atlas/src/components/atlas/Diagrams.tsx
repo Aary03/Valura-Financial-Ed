@@ -487,6 +487,253 @@ function Regulators() {
   );
 }
 
+/* ─── 11. Brands you use ───────────────────────────────────────────────────── */
+function BrandsYouUse() {
+  const tiles = [
+    { cat: "Search & maps", co: "Google", g: "G" },
+    { cat: "Your phone", co: "Apple", g: "" },
+    { cat: "Work software", co: "Microsoft", g: "M" },
+    { cat: "Streaming", co: "Netflix", g: "N" },
+    { cat: "Card network", co: "Visa", g: "V" },
+  ];
+  const w = 124, gap = 15, x0 = 40;
+  return (
+    <Frame viewBox="0 0 760 230">
+      <text x={40} y={36} fill={C.head} fontFamily={HEAD} fontWeight="700" fontSize="19">
+        You use them every day. Do you own them?
+      </text>
+      {tiles.map((t, i) => {
+        const x = x0 + i * (w + gap);
+        return (
+          <g key={t.co}>
+            <rect x={x} y={62} width={w} height={104} rx={16} fill={C.panel2} stroke={C.line} />
+            <circle cx={x + w / 2} cy={98} r="18" fill={C.green + "1A"} stroke="rgba(14,159,110,0.3)" />
+            <text x={x + w / 2} y={104} fill={C.greenDim} fontFamily={HEAD} fontWeight="800" fontSize="16" textAnchor="middle">
+              {t.g}
+            </text>
+            <text x={x + w / 2} y={138} fill={C.faint} fontFamily={FONT} fontSize="11" textAnchor="middle">
+              {t.cat}
+            </text>
+            <text x={x + w / 2} y={156} fill={C.head} fontFamily={HEAD} fontWeight="700" fontSize="13.5" textAnchor="middle">
+              {t.co}
+            </text>
+          </g>
+        );
+      })}
+      <text x={40} y={206} fill={C.sub} fontFamily={FONT} fontSize="13">
+        All five are listed in the US — and missing from most Indian portfolios.
+      </text>
+    </Frame>
+  );
+}
+
+/* ─── 12. Feeder fund ──────────────────────────────────────────────────────── */
+function FeederFund() {
+  const boxes = [
+    { t: "Your ₹", s: "Indian bank", c: C.green },
+    { t: "Indian feeder fund", s: "fund of funds", c: C.sky },
+    { t: "Underlying global fund", s: "holds the assets", c: C.violet },
+    { t: "Global stocks", s: "US & worldwide", c: C.amber },
+  ];
+  const w = 158, gap = 22, x0 = 30, y = 70;
+  return (
+    <Frame viewBox="0 0 760 210">
+      <Defs />
+      <text x={30} y={36} fill={C.head} fontFamily={HEAD} fontWeight="700" fontSize="19">
+        How a feeder fund routes your money
+      </text>
+      {boxes.map((b, i) => {
+        const x = x0 + i * (w + gap);
+        return (
+          <g key={b.t}>
+            <rect x={x} y={y} width={w} height={74} rx={14} fill={C.panel} stroke={C.line} />
+            <rect x={x} y={y} width={w} height={4} rx={2} fill={b.c} />
+            <text x={x + w / 2} y={y + 34} fill={C.head} fontFamily={HEAD} fontWeight="700" fontSize="13.5" textAnchor="middle">
+              {b.t}
+            </text>
+            <text x={x + w / 2} y={y + 54} fill={C.faint} fontFamily={FONT} fontSize="11.5" textAnchor="middle">
+              {b.s}
+            </text>
+            {i < boxes.length - 1 && (
+              <line x1={x + w + 2} y1={y + 37} x2={x + w + gap - 2} y2={y + 37} stroke={C.faint} strokeWidth="2" markerEnd="url(#arrow)" />
+            )}
+          </g>
+        );
+      })}
+      <text x={30} y={186} fill={C.sub} fontFamily={FONT} fontSize="13">
+        Convenient and rupee-simple — but each layer can add a little cost.
+      </text>
+    </Frame>
+  );
+}
+
+/* ─── 13. Index vs ETF vs single stock ─────────────────────────────────────── */
+function IndexEtfStock() {
+  const cards = [
+    { t: "Single stock", s: "One company", spread: 1, c: C.rose, note: "Highest effort & risk" },
+    { t: "ETF", s: "A basket you trade live", spread: 5, c: C.sky, note: "Diversified, flexible" },
+    { t: "Index fund", s: "A basket, set-and-forget", spread: 5, c: C.green, note: "Simplest to hold" },
+  ];
+  const w = 220, gap = 20, x0 = 30;
+  return (
+    <Frame viewBox="0 0 760 250">
+      <text x={30} y={34} fill={C.head} fontFamily={HEAD} fontWeight="700" fontSize="19">
+        Three ways to buy in
+      </text>
+      {cards.map((card, i) => {
+        const x = x0 + i * (w + gap);
+        return (
+          <g key={card.t}>
+            <rect x={x} y={56} width={w} height={170} rx={16} fill={C.panel} stroke={C.line} />
+            <rect x={x} y={56} width={w} height={5} rx={2} fill={card.c} />
+            <text x={x + 20} y={92} fill={C.head} fontFamily={HEAD} fontWeight="700" fontSize="16">
+              {card.t}
+            </text>
+            <text x={x + 20} y={114} fill={C.sub} fontFamily={FONT} fontSize="13">
+              {card.s}
+            </text>
+            <text x={x + 20} y={150} fill={C.faint} fontFamily={FONT} fontSize="11.5">
+              Diversification
+            </text>
+            {Array.from({ length: 5 }).map((_, d) => (
+              <circle key={d} cx={x + 26 + d * 20} cy={166} r="6" fill={d < card.spread ? card.c : "rgba(27,26,23,0.1)"} />
+            ))}
+            <text x={x + 20} y={204} fill={card.c} fontFamily={HEAD} fontWeight="600" fontSize="12.5">
+              {card.note}
+            </text>
+          </g>
+        );
+      })}
+    </Frame>
+  );
+}
+
+/* ─── 14. Estate tax gotcha ────────────────────────────────────────────────── */
+function EstateTax() {
+  return (
+    <Frame viewBox="0 0 760 250">
+      <text x={40} y={34} fill={C.head} fontFamily={HEAD} fontWeight="700" fontSize="19">
+        The US estate-tax gotcha
+      </text>
+      {/* threshold bar */}
+      <rect x={40} y={70} width={300} height={44} rx={10} fill="rgba(14,159,110,0.12)" stroke="rgba(14,159,110,0.35)" />
+      <text x={190} y={97} fill={C.greenDim} fontFamily={HEAD} fontWeight="700" fontSize="13.5" textAnchor="middle">
+        Up to ~$60,000: usually fine
+      </text>
+      <rect x={348} y={70} width={372} height={44} rx={10} fill="rgba(224,69,90,0.1)" stroke="rgba(224,69,90,0.4)" />
+      <text x={534} y={97} fill={C.rose} fontFamily={HEAD} fontWeight="700" fontSize="13.5" textAnchor="middle">
+        Above it: US estate tax up to 40% can apply
+      </text>
+      <text x={40} y={150} fill={C.sub} fontFamily={FONT} fontSize="13.5">
+        Directly-held US assets (US stocks/ETFs) can be taxed by the US if the holder
+      </text>
+      <text x={40} y={170} fill={C.sub} fontFamily={FONT} fontSize="13.5">
+        passes away — even for non-resident Indians. Rarely mentioned, genuinely important.
+      </text>
+      <text x={40} y={202} fill={C.head} fontFamily={HEAD} fontWeight="700" fontSize="13">
+        Ways people soften it:
+      </text>
+      <text x={40} y={222} fill={C.faint} fontFamily={FONT} fontSize="12.5">
+        holding via funds/GIFT structures · joint holding · term cover · advice before large sums.
+      </text>
+    </Frame>
+  );
+}
+
+/* ─── 15. Allocation donut ─────────────────────────────────────────────────── */
+function Allocation() {
+  const cx = 170, cy = 130, r = 58, sw = 28;
+  const Cc = 2 * Math.PI * r; // ≈ 364.4
+  const segs = [
+    { label: "India", pct: 50, color: C.green },
+    { label: "United States", pct: 35, color: C.sky },
+    { label: "Other global", pct: 15, color: C.violet },
+  ];
+  let acc = 0;
+  return (
+    <Frame viewBox="0 0 760 250">
+      <text x={40} y={36} fill={C.head} fontFamily={HEAD} fontWeight="700" fontSize="19">
+        What a globally-balanced mix can look like
+      </text>
+      <g transform={`rotate(-90 ${cx} ${cy})`}>
+        <circle cx={cx} cy={cy} r={r} fill="none" stroke="rgba(27,26,23,0.07)" strokeWidth={sw} />
+        {segs.map((s) => {
+          const len = (s.pct / 100) * Cc;
+          const dash = `${len.toFixed(1)} ${(Cc - len).toFixed(1)}`;
+          const off = -((acc / 100) * Cc);
+          acc += s.pct;
+          return (
+            <circle
+              key={s.label}
+              cx={cx}
+              cy={cy}
+              r={r}
+              fill="none"
+              stroke={s.color}
+              strokeWidth={sw}
+              strokeDasharray={dash}
+              strokeDashoffset={off.toFixed(1)}
+            />
+          );
+        })}
+      </g>
+      {segs.map((s, i) => (
+        <g key={s.label} transform={`translate(300, ${78 + i * 38})`}>
+          <rect width={14} height={14} rx={3} fill={s.color} />
+          <text x={24} y={12} fill={C.head} fontFamily={HEAD} fontWeight="700" fontSize="14">
+            {s.pct}%
+          </text>
+          <text x={66} y={12} fill={C.sub} fontFamily={FONT} fontSize="13.5">
+            {s.label}
+          </text>
+        </g>
+      ))}
+      <text x={300} y={210} fill={C.faint} fontFamily={FONT} fontSize="12">
+        Illustrative only — your mix depends on your goals, not a rule.
+      </text>
+    </Frame>
+  );
+}
+
+/* ─── 16. Compounding ──────────────────────────────────────────────────────── */
+function Compounding() {
+  const pts = [
+    { yr: "Now", v: 1, x: 70, y: 176 },
+    { yr: "10y", v: 3.1, x: 280, y: 167 },
+    { yr: "20y", v: 9.6, x: 490, y: 138 },
+    { yr: "30y", v: 30, x: 700, y: 52 },
+  ];
+  const line = `M70 176 C 180 174, 200 172, 280 167 S 430 158, 490 138 S 640 92, 700 52`;
+  const area = `${line} L700 190 L70 190 Z`;
+  return (
+    <Frame viewBox="0 0 760 230">
+      <text x={40} y={32} fill={C.head} fontFamily={HEAD} fontWeight="700" fontSize="19">
+        Why starting early beats timing
+      </text>
+      <linearGradient id="cmp" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stopColor={C.green} stopOpacity="0.22" />
+        <stop offset="100%" stopColor={C.green} stopOpacity="0" />
+      </linearGradient>
+      <path d={area} fill="url(#cmp)" />
+      <path d={line} fill="none" stroke={C.green} strokeWidth="3" strokeLinecap="round" />
+      {pts.map((p) => (
+        <g key={p.yr}>
+          <circle cx={p.x} cy={p.y} r="4.5" fill={C.green} stroke="#fff" strokeWidth="2" />
+          <text x={p.x} y={p.y - 12} fill={C.head} fontFamily={HEAD} fontWeight="700" fontSize="12.5" textAnchor="middle">
+            ₹{p.v}L
+          </text>
+          <text x={p.x} y={206} fill={C.faint} fontFamily={FONT} fontSize="12" textAnchor="middle">
+            {p.yr}
+          </text>
+        </g>
+      ))}
+      <text x={40} y={224} fill={C.sub} fontFamily={FONT} fontSize="12">
+        ₹1,00,000 at ~12%/yr (illustrative). Most of the growth shows up in the final years.
+      </text>
+    </Frame>
+  );
+}
+
 export const DIAGRAMS: Record<DiagramId, () => React.ReactElement> = {
   "world-share": WorldShare,
   "rupee-drift": RupeeDrift,
@@ -498,6 +745,12 @@ export const DIAGRAMS: Record<DiagramId, () => React.ReactElement> = {
   "us-ownership": UsOwnership,
   "tax-flow": TaxFlow,
   regulators: Regulators,
+  "brands-you-use": BrandsYouUse,
+  "feeder-fund": FeederFund,
+  "index-etf-stock": IndexEtfStock,
+  "estate-tax": EstateTax,
+  allocation: Allocation,
+  compounding: Compounding,
 };
 
 export function Diagram({ id }: { id: DiagramId }) {

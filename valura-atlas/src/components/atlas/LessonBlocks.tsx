@@ -1,4 +1,4 @@
-import { Info, Key, AlertTriangle, Lightbulb } from "lucide-react";
+import { Info, Key, AlertTriangle, Lightbulb, Check, BookOpen } from "lucide-react";
 import type { ContentBlock, Accent } from "@/lib/atlas/types";
 import { Diagram } from "./Diagrams";
 
@@ -188,6 +188,54 @@ function Block({ block }: { block: ContentBlock }) {
           <p style={{ fontSize: 22, lineHeight: 1.5, color: "var(--fg)", fontWeight: 500 }}>{inline(block.text)}</p>
           {block.cite && <cite className="mt-2 block" style={{ fontSize: 13, color: "var(--fg-3)", fontStyle: "normal" }}>— {block.cite}</cite>}
         </blockquote>
+      );
+
+    case "definition":
+      return (
+        <div
+          className="my-7 flex gap-4 rounded-2xl p-5"
+          style={{ background: "var(--surface)", border: "1px solid var(--line)", boxShadow: "var(--shadow-sm)" }}
+        >
+          <div
+            className="flex size-9 shrink-0 items-center justify-center rounded-xl"
+            style={{ background: "var(--accent-soft)" }}
+          >
+            <BookOpen size={17} color="var(--accent-strong)" />
+          </div>
+          <div>
+            <div className="font-heading" style={{ fontSize: 15.5, fontWeight: 700, color: "var(--fg)" }}>
+              {block.term}
+            </div>
+            <p style={{ marginTop: 3, fontFamily: "'Inter', sans-serif", fontSize: 14.5, lineHeight: 1.6, color: "var(--fg-2)" }}>
+              {inline(block.text)}
+            </p>
+          </div>
+        </div>
+      );
+
+    case "keytakeaways":
+      return (
+        <div
+          className="my-9 rounded-2xl p-6"
+          style={{ background: "var(--accent-soft)", border: "1px solid rgba(14,159,110,0.22)" }}
+        >
+          <div className="mb-3 flex items-center gap-2">
+            <Check size={17} color="var(--accent-strong)" strokeWidth={2.5} />
+            <span className="font-heading" style={{ fontSize: 12.5, fontWeight: 700, letterSpacing: "0.05em", textTransform: "uppercase", color: "var(--accent-strong)" }}>
+              Key takeaways
+            </span>
+          </div>
+          <ul className="space-y-2.5">
+            {block.items.map((it, i) => (
+              <li key={i} className="flex gap-2.5">
+                <Check size={16} color="var(--accent-strong)" strokeWidth={2.5} style={{ marginTop: 3, flexShrink: 0 }} />
+                <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, lineHeight: 1.55, color: "var(--fg)" }}>
+                  {inline(it)}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
       );
 
     default:
